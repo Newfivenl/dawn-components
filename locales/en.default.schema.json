@@ -2023,6 +2023,25 @@
         "name": "Multicolumn"
       }
     },
+    "shop-the-look": {
+      "name": "Shop the look",
+      "settings": {
+        
+      },
+      "blocks": {
+        "look": {
+          "name": "Look",
+          "settings": {
+            "image": {
+              "label": "Image"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Look"
+      }
+    },
     "newsletter": {
       "name": "Email signup",
       "settings": {

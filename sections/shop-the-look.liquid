@@ -1,0 +1,307 @@
+<div class="shop-the-look">
+    <div >
+        {% for block in section.blocks %}
+            {% if block.settings.image != blank %}
+                <div id="block-{{block.id}}">
+                    <div id="shop-the-look-product-details-{{block.id}}" class="shop-the-look-product__details">
+                        {% if block.settings.look_1 != blank %}
+                            <div id="shop-the-look-product-contents-1-{{block.id}}" class="shop-the-look-product-contents">
+                                <button id="block-{{block.id}}-button-1"  class="shop-the-look-product__dot"></button>
+                                <div  class="shop-the-look-product__item">
+                                    <div class="shop-the-look-product-item__image">
+                                        <img src="{{ block.settings.look_1.featured_media | img_url: "master" }}" alt="" loading="lazy">
+                                    </div>
+                                    <div class="shop-the-look-product-item__content">
+                                        <div>
+                                            <a href="{{block.settings.look_1.url}}">{{block.settings.look_1.title}}</a>
+                                        </div>
+                                        <div>
+                                            <p>{{block.settings.look_1.price | money }}</p>
+                                            <p>Quick view</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if block.settings.look_2 != blank %}
+                            <div id="shop-the-look-product-contents-2-{{block.id}}" class="shop-the-look-product-contents">
+                                <button id="block-{{block.id}}-button-2"  class="shop-the-look-product__dot"></button>
+                                <div  class="shop-the-look-product__item">
+                                    <div class="shop-the-look-product-item__image">
+                                        <img src="{{ block.settings.look_2.featured_media | img_url: "master" }}" alt="" loading="lazy">
+                                    </div>
+                                    <div class="shop-the-look-product-item__content">
+                                        <div>
+                                            <a href="{{block.settings.look_2.url}}">{{block.settings.look_2.title}}</a>
+                                        </div>
+                                        <div>
+                                            <p>{{block.settings.look_2.price | money }}</p>
+                                            <p>Quick view</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <img class="image-container" src="{{block.settings.image | img_url: "master"}}" alt="" loading="lazy">
+                    </div>
+                    
+                </div>
+                <style>
+                    #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-1-{{block.id}} {
+                        top:{{block.settings.look_1_y_axis}}%;
+                        left: {{block.settings.look_1_x_axis}}%;
+                    }
+
+                    #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-2-{{block.id}} {
+                        top:{{block.settings.look_2_y_axis}}%;
+                        left: {{block.settings.look_2_x_axis}}%;
+                    }
+
+                </style>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+
+.shop-the-look > div {
+    display: flex;
+    
+}
+
+.shop-the-look > div > div {
+    position: relative;
+}
+
+
+ .shop-the-look img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+ }
+
+ .shop-the-look-product__details {
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+ }
+
+ .shop-the-look-product-contents {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+ }
+
+ .shop-the-look-product__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    width: 330px;
+    height: 120px;
+    padding: 15px 22px 15px 11px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.28);
+    background-color: #fff;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .4s cubic-bezier(.75,0,.175,1),opacity .4s cubic-bezier(.75,0,.175,1),transform .4s cubic-bezier(.75,0,.175,1);
+    will-change: transform;
+    box-shadow: 0 1px 5px #0000001a;
+    transform-origin: top left;
+
+ }
+
+ .shop-the-look-product__item.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+ .shop-the-look-product__item:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: #fff;
+    border-width: 8px;
+    right: 97%;
+    transform: rotate(45deg);
+}
+
+ .shop-the-look-product-item__content > div:first-child {
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 18px;
+ }
+
+ .shop-the-look-product-item__content a {
+    text-decoration: none !important;
+    color: #000 !important;
+ }
+
+ .shop-the-look-product-item__content > div:last-child {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14px;
+ }
+
+ .shop-the-look-product-item__content > div:last-child p:first-child {
+    margin-right: 10px;
+    margin-bottom: 0px;
+ }
+
+
+
+ .shop-the-look-product-item__image {
+    display: flex;
+ }
+
+ .shop-the-look-product-item__image > img {
+    width: 90px;
+    height: 90px;
+ }
+
+ .shop-the-look-product__dot {
+    width: 25px;
+    height: 25px;
+    padding: 4px;
+    opacity: 0.74;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    border-radius: 100%;
+    border: 6px solid rgba(255, 255, 255, 1);
+    transition: opacity 0.3s;
+ }
+
+ .shop-the-look-product__dot:hover {
+    transition: opacity 0.3s;
+    opacity: 1;
+ }
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        document.querySelectorAll('.shop-the-look-product-contents').forEach((content)=> {
+            const button = content.querySelector('.shop-the-look-product__dot');
+            button.addEventListener('click', function(){
+                content.querySelector('.shop-the-look-product__item').classList.toggle('open');
+            })
+
+            // const overflowing = isOverflown(content.querySelector('.shop-the-look-product__item'));
+            // content.querySelector('.shop-the-look-product__item').setAttribute('overflowing', overflowing)
+            // console.log(isOverflown(content.querySelector('.shop-the-look-product__item')));
+
+        });
+
+        document.querySelectorAll('.image-container').forEach((image) => {
+            image.addEventListener('click', function(){
+                document.querySelectorAll('.shop-the-look-product__item').forEach((product_item) => {
+                    product_item.classList.remove('open');
+                })
+            });
+        });
+
+
+        // function isOverflown(element) {
+        //     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+        // }
+        
+    });
+</script>
+
+{% schema %}
+{
+    "name": "t:sections.shop-the-look.name",
+    "class": "section",
+    "tag": "section",
+    "max_blocks":2,
+    "blocks": [
+        {
+            "type": "look",
+            "name": "t:sections.shop-the-look.blocks.look.name",
+            "settings": [
+                {
+                "type": "image_picker",
+                "id": "image",
+                "label": "t:sections.shop-the-look.blocks.look.settings.image.label"
+                },
+                {
+                    "type": "header",
+                    "content": "First product look settings"
+                },
+                {
+                    "type": "product",
+                    "id": "look_1",
+                    "label": "Product"
+                },
+                {
+                    "type": "range",
+                    "id": "look_1_y_axis",
+                    "label": "Vertical position",
+                    "min": 5,
+                    "max": 100,
+                    "step": 5,
+                    "default": 5,
+                    "info": "From top to bottom position of dot button"
+                },
+                {
+                    "type": "range",
+                    "id": "look_1_x_axis",
+                    "label": "Horizontal position",
+                    "min": 5,
+                    "max": 100,
+                    "step": 5,
+                    "default": 5,
+                    "info": "From left to right position of dot button"
+                },
+                {
+                    "type": "header",
+                    "content": "Second product look settings"
+                },
+                {
+                    "type": "product",
+                    "id": "look_2",
+                    "label": "Product"
+                },
+                {
+                    "type": "range",
+                    "id": "look_2_y_axis",
+                    "min": 5,
+                    "max": 100,
+                    "step": 5,
+                    "default": 5,
+                    "label": "Vertical position",
+                    "info": "From top to bottom position of dot button"
+                },
+                {
+                    "type": "range",
+                    "id": "look_2_x_axis",
+                    "min": 5,
+                    "max": 100,
+                    "step": 5,
+                    "default": 5,
+                    "label": "Horizontal position",
+                    "info": "From left to right position of dot button"
+                }
+            ]
+        }
+    ],
+    "presets": [
+    {
+      "name": "t:sections.shop-the-look.name",
+      "blocks": [
+        {
+          "type": "look"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
