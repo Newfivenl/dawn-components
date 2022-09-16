@@ -1,6 +1,6 @@
 Create USP Product
 
-section name: nf-usp-product.liquid
+snippet name: nf-usp-product.liquid
 create a liquid file inside snippets folder named: nf-usp-product.liquid
 
 1. use this code
