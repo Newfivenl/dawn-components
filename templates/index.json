@@ -211,7 +211,7 @@
     "1663335456f5285717": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "{%if customer%}\n\n{{customer.firstname}}\n{%endif%}",
+        "custom_liquid": "{{customer.first_name}}",
         "color_scheme": "background-1",
         "padding_top": 40,
         "padding_bottom": 52
