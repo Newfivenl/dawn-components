@@ -83,10 +83,15 @@
             {%- endif -%}
             <div class="link-filters">
               {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
-                {{ menu-handle }}
+                 {% assign handle = menu-handle %}
+                {% for link in linklists.handle.links %}
+                <!-- menu content -->
+                <li class="menu-link">
+                  <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
               {%- endfor %}
-          {{ collection.metafields.custom.single_handle.value }}
-              {% for link in linklists.['collection.metafields.custom.single_handle.value'].links %}
+              {% for link in linklists.collections.links %}
                 <!-- menu content -->
                 <li class="menu-link">
                   <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
