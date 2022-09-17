@@ -85,6 +85,7 @@
                {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
                {{ menu-handle }}
                  {% assign handle = 'menu-handle' %}
+                 {{ handle }}
               {%- endfor %}
               
               {%- assign handle = "collections" %}
