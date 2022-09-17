@@ -32,13 +32,33 @@
 .collection.loading .loading-overlay {
   display: block;
 }
-.grid-overlay {display: block;}
-.collection.loading .grid__item .grid-overlay {
-background: black;
-display: block;
-
+.grid-overlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fafafa;
 }
-
+.collection.loading .grid__item .grid-overlay {
+display: block;
+  background-color: #fafafa;
+  animation-name: color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes color {
+  0% {
+    background-color: #fafafa;
+  }
+  50% {
+    background-color: #d8d8d8;
+  }
+  100 {
+    background-color: #fafafa;
+  }
+}
 .collection--empty .title-wrapper {
   margin-top: 10rem;
   margin-bottom: 15rem;
