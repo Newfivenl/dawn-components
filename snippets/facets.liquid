@@ -83,14 +83,14 @@
             {%- endif -%}
             <div class="link-filters">
               {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
-                {% for link in linklists.['menu-handle'].links %}
+                {{ menu-handle }}
+              {%- endfor %}
+              {% for link in linklists.menu-handle.links %}
                 <!-- menu content -->
                 <li class="menu-link">
                   <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
                 </li>
               {% endfor %}
-              {%- endfor %}
-              
               
             </div>
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
