@@ -81,7 +81,14 @@
                 {%- endfor -%}
               </div>
             {%- endif -%}
-
+            <div class="link-filters">
+              {% for link in linklists.collections.links %}
+                <!-- menu content -->
+                <li class="menu-link">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </div>
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
             {% comment %} Filters for both horizontal and vertical filter {% endcomment %}
             {%- for filter in results.filters -%}
