@@ -83,7 +83,7 @@
             {%- endif -%}
             <div class="link-filters">
               {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
-                 {% assign handle = menu-handle %}
+                 {{ menu-handle }}
               {%- endfor %}
               {% for link in linklists.handle.links %}
                 <!-- menu content -->
