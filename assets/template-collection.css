@@ -32,6 +32,7 @@
 .collection.loading .loading-overlay {
   display: block;
 }
+.grid__item {position: relative;}
 .grid-overlay {
   display: none;
   position: absolute;
