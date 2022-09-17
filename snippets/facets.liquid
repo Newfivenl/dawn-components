@@ -82,12 +82,16 @@
               </div>
             {%- endif -%}
             <div class="link-filters">
-              {% for link in linklists.collections.links %}
+              {% for menu-handle in collection.custom.handles_filter_menu.value -%}
+                {% for link in linklists.[menu-handle].links %}
                 <!-- menu content -->
                 <li class="menu-link">
                   <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
                 </li>
               {% endfor %}
+              {%- endfor %}
+
+              
             </div>
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
             {% comment %} Filters for both horizontal and vertical filter {% endcomment %}
