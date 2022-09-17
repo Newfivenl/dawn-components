@@ -85,6 +85,7 @@
                {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
                  {% assign handle = menu-handle | escape %}
                 <!--                   -->
+                 {{ linklists[handle].title }}
                  {% for link in linklists[handle].links %}
                     <!-- menu content -->
                     <li class="menu-link">
