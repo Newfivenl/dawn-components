@@ -32,6 +32,12 @@
 .collection.loading .loading-overlay {
   display: block;
 }
+.grid-overlay {display: block;}
+.collection.loading .grid__item .grid-overlay {
+background: black;
+display: block;
+
+}
 
 .collection--empty .title-wrapper {
   margin-top: 10rem;
