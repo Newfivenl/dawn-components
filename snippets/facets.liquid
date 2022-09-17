@@ -85,7 +85,7 @@
               {% for menu-handle in collection.metafields.custom.handles_filter_menu.value -%}
                 {{ menu-handle }}
               {%- endfor %}
-              {% for link in linklists.menu-handle.links %}
+              {% for link in linklists.collection.metafields.custom.handles_filter_menu.value.links %}
                 <!-- menu content -->
                 <li class="menu-link">
                   <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
