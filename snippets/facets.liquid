@@ -91,22 +91,9 @@
                       <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
                     </li>
                   {% endfor %}
+                  <hr>
               {%- endfor %}
-                <hr>
-              {%- assign handle = "collections" %}
-              {% for link in linklists[handle].links %}
-                <!-- menu content -->
-                <li class="menu-link">
-                  <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
-                </li>
-              {% endfor %}
-              <hr>
-              {% for link in linklists.collections.links %}
-                <!-- menu content -->
-                <li class="menu-link">
-                  <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
-                </li>
-              {% endfor %}
+               
               
             </div>
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
