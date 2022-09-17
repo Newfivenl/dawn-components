@@ -51,7 +51,7 @@
                       <span>{{ 'products.facets.clear_all' | t }}</span>
                     </a>
                   </facet-remove>
-                  test
+                  
                 </div>
                 {%- for filter in results.filters -%}
                   {%- for value in filter.active_values -%}
@@ -85,7 +85,7 @@
               {% for link in linklists.collections.links %}
                 <!-- menu content -->
                 <li class="menu-link">
-                  <a href="{{ link.url }}">{{ link.title }}</a>
+                  <input type="checkbox" name="" {%if link.active%}checked{%endif%}>  <a href="{{ link.url }}" class="{%if link.active%}active{%endif%}">{{ link.title }}</a>
                 </li>
               {% endfor %}
             </div>
