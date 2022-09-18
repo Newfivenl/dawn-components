@@ -46,7 +46,7 @@
 display: block;
   background-color: #fafafa;
   animation-name: color;
-  animation-duration: 2s;
+  animation-duration: 0.2s;
   animation-iteration-count: infinite;
 }
 @keyframes color {
