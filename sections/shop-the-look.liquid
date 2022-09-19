@@ -3,203 +3,201 @@
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <div class="shop-the-look">
-    <div >
-        {% for block in section.blocks %}
-            {% if block.settings.image != blank %}
-                <div id="block-{{block.id}}">
-                    <div id="shop-the-look-product-details-{{block.id}}" class="shop-the-look-product__details">
-                        {% if block.settings.look_1 != blank %}
-                            {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_1.id -%}
-                            <div id="shop-the-look-product-contents-1-{{block.id}}" class="shop-the-look-product-contents">
-                                  <div class="shop-the-look-product--dot__container">
-                                    <button id="block-{{block.id}}-button-1"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
-                                    <div class="shop-the-look-product-dot__animation"></div>
-                                  </div>
-                                  
-                                <div class="quick-add">
-                                    
-                                    {%- if block.settings.look_1.variants.size == 1 -%}
-                                      <product-form>
-                                        {%- form 'product', block.settings.look_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                                          <input type="hidden" name="id" value="{{ block.settings.look_1.selected_or_first_available_variant.id }}" disabled>
-                                          <button
-                                            id="{{ product_form_id }}-submit"
-                                            type="submit"
-                                            name="add"
-                                            class="quick-add__submit button button--full-width button--secondary"
-                                            aria-haspopup="dialog"
-                                            aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_1.id }}"
-                                            aria-live="polite"
-                                            data-sold-out-message="true"
-                                            {% if block.settings.look_1.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                                          >
-                                            <span>
-                                              {%- if block.settings.look_1.selected_or_first_available_variant.available -%}
-                                                {{ 'products.product.add_to_cart' | t }}
-                                              {%- else -%}
-                                                {{ 'products.product.sold_out' | t }}
-                                              {%- endif -%}
-                                            </span>
-                                            <span class="sold-out-message hidden">
-                                              {{ 'products.product.sold_out' | t }}
-                                            </span>
-                                            <div class="loading-overlay__spinner hidden">
-                                              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                                              </svg>
-                                            </div>
-                                          </button>
-                                        {%- endform -%}
-                                      </product-form>
-                                    {%- else -%}
-                                      <modal-opener data-modal="#QuickAdd-{{ block.settings.look_1.id }}">
-                                        <button
-                                          id="{{ product_form_id }}-submit"
-                                          type="submit"
-                                          name="add"
-                                          class="quick-add__submit button button--full-width button--secondary"
-                                          aria-haspopup="dialog"
-                                          aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_1.id }}"
-                                          data-product-url="{{ block.settings.look_1.url }}"
-                                        >
-                                          {{ 'products.product.choose_options' | t }}
-                                          <div class="loading-overlay__spinner hidden">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                                            </svg>
-                                          </div>
-                                        </button>
-                                      </modal-opener>
-                                      <quick-add-modal id="QuickAdd-{{ block.settings.look_1.id }}" class="quick-add-modal">
-                                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_1.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
-                                          <button id="ModalClose-{{ block.settings.look_1.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                                          <div id="QuickAddInfo-{{ block.settings.look_1.id }}" class="quick-add-modal__content-info">
-                                          </div>
-                                        </div>
-                                      </quick-add-modal>
-                                    {%- endif -%}
-                                </div>
-                                <div  class="shop-the-look-product__item">
-                                    <div class="shop-the-look-product-item__image">
-                                        <img src="{{ block.settings.look_1.featured_media | img_url: "master" }}" alt="" loading="lazy">
-                                    </div>
-                                    <div class="shop-the-look-product-item__content">
-                                        <div>
-                                            <a href="{{block.settings.look_1.url}}">{{block.settings.look_1.title}}</a>
-                                        </div>
-                                        <div>
-                                            <p>{{block.settings.look_1.price | money }}</p>
-                                            <p id="block-{{block.id}}-quick-view" class="shop-the-look-quick-view" product-form-id="{{product_form_id}}">Quick view</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if block.settings.look_2 != blank %}
-                            {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_2.id -%}
-                            <div id="shop-the-look-product-contents-2-{{block.id}}" class="shop-the-look-product-contents">
-                                <div class="shop-the-look-product--dot__container">
-                                  <button id="block-{{block.id}}-button-2"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
-                                  <div class="shop-the-look-product-dot__animation"></div>
-                                </div>
-                                <div class="quick-add">
-                                    
-                                    {%- if block.settings.look_2.variants.size == 1 -%}
-                                      <product-form>
-                                        {%- form 'product', block.settings.look_2, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                                          <input type="hidden" name="id" value="{{ block.settings.look_2.selected_or_first_available_variant.id }}" disabled>
-                                          <button
-                                            id="{{ product_form_id }}-submit"
-                                            type="submit"
-                                            name="add"
-                                            class="quick-add__submit button button--full-width button--secondary"
-                                            aria-haspopup="dialog"
-                                            aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_2.id }}"
-                                            aria-live="polite"
-                                            data-sold-out-message="true"
-                                            {% if block.settings.look_2.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                                          >
-                                            <span>
-                                              {%- if block.settings.look_2.selected_or_first_available_variant.available -%}
-                                                {{ 'products.product.add_to_cart' | t }}
-                                              {%- else -%}
-                                                {{ 'products.product.sold_out' | t }}
-                                              {%- endif -%}
-                                            </span>
-                                            <span class="sold-out-message hidden">
-                                              {{ 'products.product.sold_out' | t }}
-                                            </span>
-                                            <div class="loading-overlay__spinner hidden">
-                                              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                                              </svg>
-                                            </div>
-                                          </button>
-                                        {%- endform -%}
-                                      </product-form>
-                                    {%- else -%}
-                                      <modal-opener data-modal="#QuickAdd-{{ block.settings.look_2.id }}">
-                                        <button
-                                          id="{{ product_form_id }}-submit"
-                                          type="submit"
-                                          name="add"
-                                          class="quick-add__submit button button--full-width button--secondary"
-                                          aria-haspopup="dialog"
-                                          aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_2.id }}"
-                                          data-product-url="{{ block.settings.look_2.url }}"
-                                        >
-                                          {{ 'products.product.choose_options' | t }}
-                                          <div class="loading-overlay__spinner hidden">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                                            </svg>
-                                          </div>
-                                        </button>
-                                      </modal-opener>
-                                      <quick-add-modal id="QuickAdd-{{ block.settings.look_2.id }}" class="quick-add-modal">
-                                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_2.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
-                                          <button id="ModalClose-{{ block.settings.look_2.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-                                          <div id="QuickAddInfo-{{ block.settings.look_2.id }}" class="quick-add-modal__content-info">
-                                          </div>
-                                        </div>
-                                      </quick-add-modal>
-                                    {%- endif -%}
-                                </div>
-                                <div  class="shop-the-look-product__item">
-                                    <div class="shop-the-look-product-item__image">
-                                        <img src="{{ block.settings.look_2.featured_media | img_url: "master" }}" alt="" loading="lazy">
-                                    </div>
-                                    <div class="shop-the-look-product-item__content">
-                                        <div>
-                                            <a href="{{block.settings.look_2.url}}">{{block.settings.look_2.title}}</a>
-                                        </div>
-                                        <div>
-                                            <p>{{block.settings.look_2.price | money }}</p>
-                                            <p id="block-{{block.id}}-quick-view" class="shop-the-look-quick-view" product-form-id="{{product_form_id}}">Quick view</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                        <img class="image-container" src="{{block.settings.image | img_url: "master"}}" alt="" loading="lazy">
-                    </div>
-                    
+  <div>
+    {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+        <div id="block-{{block.id}}">
+          <div id="shop-the-look-product-details-{{block.id}}" class="shop-the-look-product__details">
+            {% if block.settings.look_1 != blank %}
+              {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_1.id -%}
+              <div id="shop-the-look-product-contents-1-{{block.id}}" class="shop-the-look-product-contents">
+                <div class="shop-the-look-product--dot__container">
+                  <button id="block-{{block.id}}-button-1"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
+                  <div class="shop-the-look-product-dot__animation"></div>
                 </div>
-                <style>
-                    #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-1-{{block.id}} {
-                        top:{{block.settings.look_1_y_axis}}%;
-                        left: {{block.settings.look_1_x_axis}}%;
-                    }
-
-                    #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-2-{{block.id}} {
-                        top:{{block.settings.look_2_y_axis}}%;
-                        left: {{block.settings.look_2_x_axis}}%;
-                    }
-
-                </style>
+                <div class="quick-add">
+                    
+                    {%- if block.settings.look_1.variants.size == 1 -%}
+                      <product-form>
+                        {%- form 'product', block.settings.look_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                          <input type="hidden" name="id" value="{{ block.settings.look_1.selected_or_first_available_variant.id }}" disabled>
+                          <button
+                            id="{{ product_form_id }}-submit"
+                            type="submit"
+                            name="add"
+                            class="quick-add__submit button button--full-width button--secondary"
+                            aria-haspopup="dialog"
+                            aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_1.id }}"
+                            aria-live="polite"
+                            data-sold-out-message="true"
+                            {% if block.settings.look_1.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                          >
+                            <span>
+                              {%- if block.settings.look_1.selected_or_first_available_variant.available -%}
+                                {{ 'products.product.add_to_cart' | t }}
+                              {%- else -%}
+                                {{ 'products.product.sold_out' | t }}
+                              {%- endif -%}
+                            </span>
+                            <span class="sold-out-message hidden">
+                              {{ 'products.product.sold_out' | t }}
+                            </span>
+                            <div class="loading-overlay__spinner hidden">
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                              </svg>
+                            </div>
+                          </button>
+                        {%- endform -%}
+                      </product-form>
+                    {%- else -%}
+                      <modal-opener data-modal="#QuickAdd-{{ block.settings.look_1.id }}">
+                        <button
+                          id="{{ product_form_id }}-submit"
+                          type="submit"
+                          name="add"
+                          class="quick-add__submit button button--full-width button--secondary"
+                          aria-haspopup="dialog"
+                          aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_1.id }}"
+                          data-product-url="{{ block.settings.look_1.url }}"
+                        >
+                          {{ 'products.product.choose_options' | t }}
+                          <div class="loading-overlay__spinner hidden">
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+                        </button>
+                      </modal-opener>
+                      <quick-add-modal id="QuickAdd-{{ block.settings.look_1.id }}" class="quick-add-modal">
+                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_1.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
+                          <button id="ModalClose-{{ block.settings.look_1.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                          <div id="QuickAddInfo-{{ block.settings.look_1.id }}" class="quick-add-modal__content-info">
+                          </div>
+                        </div>
+                      </quick-add-modal>
+                    {%- endif -%}
+                </div>
+                <div  class="shop-the-look-product__item">
+                    <div class="shop-the-look-product-item__image">
+                        <img src="{{ block.settings.look_1.featured_media | img_url: "master" }}" alt="" loading="lazy">
+                    </div>
+                    <div class="shop-the-look-product-item__content">
+                        <div>
+                            <a href="{{block.settings.look_1.url}}">{{block.settings.look_1.title}}</a>
+                        </div>
+                        <div>
+                            <p>{{block.settings.look_1.price | money }}</p>
+                            <p id="block-{{block.id}}-quick-view" class="shop-the-look-quick-view" product-form-id="{{product_form_id}}">Quick view</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
             {% endif %}
-        {% endfor %}
-    </div>
+            {% if block.settings.look_2 != blank %}
+              {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_2.id -%}
+              <div id="shop-the-look-product-contents-2-{{block.id}}" class="shop-the-look-product-contents">
+                <div class="shop-the-look-product--dot__container">
+                  <button id="block-{{block.id}}-button-2"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
+                  <div class="shop-the-look-product-dot__animation"></div>
+                </div>
+                <div class="quick-add">
+                    
+                    {%- if block.settings.look_2.variants.size == 1 -%}
+                      <product-form>
+                        {%- form 'product', block.settings.look_2, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                          <input type="hidden" name="id" value="{{ block.settings.look_2.selected_or_first_available_variant.id }}" disabled>
+                          <button
+                            id="{{ product_form_id }}-submit"
+                            type="submit"
+                            name="add"
+                            class="quick-add__submit button button--full-width button--secondary"
+                            aria-haspopup="dialog"
+                            aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_2.id }}"
+                            aria-live="polite"
+                            data-sold-out-message="true"
+                            {% if block.settings.look_2.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                          >
+                            <span>
+                              {%- if block.settings.look_2.selected_or_first_available_variant.available -%}
+                                {{ 'products.product.add_to_cart' | t }}
+                              {%- else -%}
+                                {{ 'products.product.sold_out' | t }}
+                              {%- endif -%}
+                            </span>
+                            <span class="sold-out-message hidden">
+                              {{ 'products.product.sold_out' | t }}
+                            </span>
+                            <div class="loading-overlay__spinner hidden">
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                              </svg>
+                            </div>
+                          </button>
+                        {%- endform -%}
+                      </product-form>
+                    {%- else -%}
+                      <modal-opener data-modal="#QuickAdd-{{ block.settings.look_2.id }}">
+                        <button
+                          id="{{ product_form_id }}-submit"
+                          type="submit"
+                          name="add"
+                          class="quick-add__submit button button--full-width button--secondary"
+                          aria-haspopup="dialog"
+                          aria-labelledby="{{ product_form_id }}-submit title-{{ section.id }}-{{ block.settings.look_2.id }}"
+                          data-product-url="{{ block.settings.look_2.url }}"
+                        >
+                          {{ 'products.product.choose_options' | t }}
+                          <div class="loading-overlay__spinner hidden">
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+                        </button>
+                      </modal-opener>
+                      <quick-add-modal id="QuickAdd-{{ block.settings.look_2.id }}" class="quick-add-modal">
+                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_2.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
+                          <button id="ModalClose-{{ block.settings.look_2.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                          <div id="QuickAddInfo-{{ block.settings.look_2.id }}" class="quick-add-modal__content-info">
+                          </div>
+                        </div>
+                      </quick-add-modal>
+                    {%- endif -%}
+                </div>
+                <div  class="shop-the-look-product__item">
+                    <div class="shop-the-look-product-item__image">
+                        <img src="{{ block.settings.look_2.featured_media | img_url: "master" }}" alt="" loading="lazy">
+                    </div>
+                    <div class="shop-the-look-product-item__content">
+                        <div>
+                            <a href="{{block.settings.look_2.url}}">{{block.settings.look_2.title}}</a>
+                        </div>
+                        <div>
+                            <p>{{block.settings.look_2.price | money }}</p>
+                            <p id="block-{{block.id}}-quick-view" class="shop-the-look-quick-view" product-form-id="{{product_form_id}}">Quick view</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            {% endif %}
+            <img class="image-container" src="{{ block.settings.image | image_url: width: 1500 }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+          </div>
+        </div>
+        <style>
+            #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-1-{{block.id}} {
+                top:{{block.settings.look_1_y_axis}}%;
+                left: {{block.settings.look_1_x_axis}}%;
+            }
+
+            #shop-the-look-product-details-{{block.id}} #shop-the-look-product-contents-2-{{block.id}} {
+                top:{{block.settings.look_2_y_axis}}%;
+                left: {{block.settings.look_2_x_axis}}%;
+            }
+
+        </style>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 <style>
