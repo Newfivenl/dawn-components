@@ -9,10 +9,15 @@
                 <div id="block-{{block.id}}">
                     <div id="shop-the-look-product-details-{{block.id}}" class="shop-the-look-product__details">
                         {% if block.settings.look_1 != blank %}
+                            {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_1.id -%}
                             <div id="shop-the-look-product-contents-1-{{block.id}}" class="shop-the-look-product-contents">
-                                <button id="block-{{block.id}}-button-1"  class="shop-the-look-product__dot" clicked="false"></button>
+                                  <div class="shop-the-look-product--dot__container">
+                                    <button id="block-{{block.id}}-button-1"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
+                                    <div class="shop-the-look-product-dot__animation"></div>
+                                  </div>
+                                  
                                 <div class="quick-add">
-                                    {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_1.id -%}
+                                    
                                     {%- if block.settings.look_1.variants.size == 1 -%}
                                       <product-form>
                                         {%- form 'product', block.settings.look_1, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -91,10 +96,14 @@
                             </div>
                         {% endif %}
                         {% if block.settings.look_2 != blank %}
+                            {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_2.id -%}
                             <div id="shop-the-look-product-contents-2-{{block.id}}" class="shop-the-look-product-contents">
-                                <button id="block-{{block.id}}-button-2"  class="shop-the-look-product__dot" clicked="false"></button>
+                                <div class="shop-the-look-product--dot__container">
+                                  <button id="block-{{block.id}}-button-2"  class="shop-the-look-product__dot" clicked="false" product-form-id="{{product_form_id}}"></button>
+                                  <div class="shop-the-look-product-dot__animation"></div>
+                                </div>
                                 <div class="quick-add">
-                                    {%- assign product_form_id = 'quick-add-' | append: section.id | append: block.settings.look_2.id -%}
+                                    
                                     {%- if block.settings.look_2.variants.size == 1 -%}
                                       <product-form>
                                         {%- form 'product', block.settings.look_2, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -196,131 +205,202 @@
 <style>
 
 .shop-the-look > div {
-    display: flex;
-    
+  display: flex;
+  
 }
 
 .shop-the-look > div > div {
-    position: relative;
+  position: relative;
 }
 
 
- .shop-the-look img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
- }
+.shop-the-look img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
 
- .shop-the-look-product__details {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
- }
+.shop-the-look-product__details {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+}
 
- .shop-the-look-product-contents {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
- }
+.shop-the-look-product-contents {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
 
- .shop-the-look-product__item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 12px;
-    width: 330px;
-    height: 120px;
-    padding: 15px 22px 15px 11px;
-    border-radius: 3px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.28);
-    background-color: #fff;
+.shop-the-look-product__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  width: 330px;
+  height: 120px;
+  padding: 15px 22px 15px 11px;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.28);
+  background-color: #fff;
 
-    visibility: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .4s cubic-bezier(.75,0,.175,1),opacity .4s cubic-bezier(.75,0,.175,1),transform .4s cubic-bezier(.75,0,.175,1);
+  will-change: transform;
+  box-shadow: 0 1px 5px #0000001a;
+  transform-origin: top left;
+
+}
+
+.shop-the-look-product__item.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.shop-the-look-product__item:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 8px;
+  right: 97%;
+  transform: rotate(45deg);
+}
+
+.shop-the-look-product-item__content > div:first-child {
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 18px;
+}
+
+.shop-the-look-product-item__content a {
+  text-decoration: none !important;
+  color: #000 !important;
+}
+
+.shop-the-look-product-item__content > div:last-child {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+}
+
+.shop-the-look-product-item__content > div:last-child p:first-child {
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+
+
+.shop-the-look-product-item__image {
+  display: flex;
+}
+
+.shop-the-look-product-item__image > img {
+  width: 90px;
+  height: 90px;
+}
+
+.shop-the-look-product__dot {
+  position: relative;
+  z-index: 1;
+  width: 25px;
+  height: 25px;
+  padding: 4px;
+  opacity: 0.74;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  border-radius: 100%;
+  border: 6px solid rgba(255, 255, 255, 1);
+  transition: opacity 0.3s;
+}
+
+.shop-the-look-product--dot__container {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  display: flex;
+}
+
+.shop-the-look-product-dot__animation {
+  border: 2px solid #f5f0f0;
+  border-radius: 100%;
+  display: flex !important;
+  opacity: 0.74;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  animation: scaleIn 2.5s infinite cubic-bezier(.36, .11, .89, .32);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(.5, .5);
+    opacity: .5;
+  }
+  to {
+    transform: scale(2, 2);
     opacity: 0;
-    transition: visibility .4s cubic-bezier(.75,0,.175,1),opacity .4s cubic-bezier(.75,0,.175,1),transform .4s cubic-bezier(.75,0,.175,1);
-    will-change: transform;
-    box-shadow: 0 1px 5px #0000001a;
-    transform-origin: top left;
-
- }
-
- .shop-the-look-product__item.open {
-    visibility: visible;
-    opacity: 1;
+  }
 }
 
- .shop-the-look-product__item:before {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: #fff;
-    border-width: 8px;
-    right: 97%;
-    transform: rotate(45deg);
+.shop-the-look-product__dot:hover {
+  transition: opacity 0.3s;
+  opacity: 1;
 }
 
- .shop-the-look-product-item__content > div:first-child {
-    font-size: 14px;
-    line-height: 17px;
-    padding-top: 18px;
- }
+.shop-the-look-quick-view {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
- .shop-the-look-product-item__content a {
-    text-decoration: none !important;
-    color: #000 !important;
- }
+.shop-the-look-quick-view:hover {
+color: #000;
+}
 
- .shop-the-look-product-item__content > div:last-child {
+.shop-the-look .quick-add {
+  display: none;
+}
+
+@media only screen and (max-width: 820px) {
+
+  .shop-the-look > div {
+    flex-direction: column;
+  }
+
+  .shop-the-look-product__item {
+    width: 280px;
+  }
+
+  .shop-the-look-product-item__content a {
+    line-height: 19px;
+  }
+
+  .shop-the-look-product__details {
     display: flex;
-    justify-content: flex-start;
-    font-size: 14px;
- }
+  }
 
- .shop-the-look-product-item__content > div:last-child p:first-child {
-    margin-right: 10px;
-    margin-bottom: 0px;
- }
+}
 
+@media only screen and (max-width: 768px) {
+  .shop-the-look-product__item {
+    width: 250px;
+  }
+}
 
-
- .shop-the-look-product-item__image {
-    display: flex;
- }
-
- .shop-the-look-product-item__image > img {
-    width: 90px;
-    height: 90px;
- }
-
- .shop-the-look-product__dot {
-    width: 25px;
-    height: 25px;
-    padding: 4px;
-    opacity: 0.74;
-    background-color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    border-radius: 100%;
-    border: 6px solid rgba(255, 255, 255, 1);
-    transition: opacity 0.3s;
- }
-
- .shop-the-look-product__dot:hover {
-    transition: opacity 0.3s;
-    opacity: 1;
- }
-
- .shop-the-look-quick-view {
-    cursor: pointer;
-    text-decoration: underline;
- }
-
- .shop-the-look .quick-add {
+@media only screen and (max-width: 700px) {
+  .shop-the-look-product__item {
     display: none;
- }
+  }
+}
+
+
 
 </style>
 
@@ -329,6 +409,7 @@
        
         document.querySelectorAll('.shop-the-look-product-contents').forEach((content)=> {
             const button = content.querySelector('.shop-the-look-product__dot');
+            const productFormId = button.getAttribute('product-form-id');
             const self = content.querySelector('.shop-the-look-product__item');
 
             button.addEventListener('click', function(){
@@ -342,14 +423,27 @@
                         allButton.setAttribute('clicked', false);
                     });
                     button.setAttribute('clicked', 'true');
-                    self.classList.add('open');
+                    
+
+                    if (window.matchMedia("(max-width: 700px)").matches) {
+                      document.querySelector("#"+productFormId+"-submit").click();
+                    } else {
+                      self.classList.add('open');
+                    }
+
                    
                 }else if(button.getAttribute('clicked') === 'true') {
                     document.querySelectorAll('.shop-the-look-product__dot').forEach((allButton) => {
                         allButton.setAttribute('clicked', false);
                     });
                     button.setAttribute('clicked', 'false');
-                    self.classList.remove('open');
+                    
+                    if (window.matchMedia("(max-width: 700px)").matches) {
+                      document.querySelector("#"+productFormId+"-submit").click();
+                    } else {
+                      self.classList.remove('open');
+                    }
+
                 }
 
             });
@@ -368,7 +462,6 @@
         document.querySelectorAll('.shop-the-look-quick-view').forEach((quick_view_button) => {
             quick_view_button.addEventListener('click', function(){
                 const productFormId = quick_view_button.getAttribute('product-form-id');
-                console.log(productFormId)
                 document.querySelector("#"+productFormId+"-submit").click();
             });
         });
