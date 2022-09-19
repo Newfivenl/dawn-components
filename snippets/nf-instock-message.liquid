@@ -22,15 +22,23 @@
         {% assign varaintSelected = '' %}
         {% endif %}
         
-        {% if variant.inventory_quantity == 0 and variant.available == false or variant.inventory_quantity < 0 and variant.available == false %}
-        {% assign dataStock = 'no-stock' %}
-        {% elsif variant.inventory_quantity == 0 and variant.available == true %}
-        {% assign dataStock = 'in-stock' %}
-        {% elsif variant.inventory_quantity <= 3 %}
-        {% assign dataStock = 'limited-stock' %}
-        {% elsif variant.inventory_quantity > 4 %}
-        {% assign dataStock = 'in-stock' %}
-        {% endif %}                  
+        {% assign inventory_threshold = block.settings.inventory_threshold %}
+
+        {% if inventory_threshold > 0 %}
+            {% if variant.inventory_quantity == 0 and variant.available == false or variant.inventory_quantity < 0 and variant.available == false %}
+            {% assign dataStock = 'no-stock' %}
+            {% elsif variant.inventory_quantity == 0 and variant.available == true %}
+            {% assign dataStock = 'in-stock' %}
+            {% elsif variant.inventory_quantity <= inventory_threshold %}
+            {% assign dataStock = 'limited-stock' %}
+            {% elsif variant.inventory_quantity > inventory_threshold %}
+            {% assign dataStock = 'in-stock' %}
+            {% endif %}
+        {% else %}
+            {% assign dataStock = 'in-stock' %}   
+        {% endif %}
+        
+                       
         
         <div class="product-stock-label {{ varaintSelected }}" data-stock="{{ dataStock }}" data-stockcount="{{ variant.inventory_quantity }}" data-variantid="{{ varaintId }}" data-variant-available="{{ variant.available }}">
         <span class="in-stock">{{ 'products.product.in_stock' | t }}</span>

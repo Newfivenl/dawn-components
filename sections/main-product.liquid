@@ -410,7 +410,7 @@
               </div>
             </noscript>
           {%- when 'in_stock_msg' -%}
-           {% render 'nf-instock-message' variant:variant %}
+           {% render 'nf-instock-message' variant:variant, block:block %}
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -652,7 +652,22 @@
       "type": "in_stock_msg",
       "name": "NF In stock message",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Inventory"
+        },
+        {
+          "type": "range",
+          "id": "inventory_threshold",
+          "min": 0,
+          "max":  50,
+          "step": 5,
+          "default": 0,
+          "label": "Low inventory threshold",
+          "info": "Use low stock color when quantity is below the threshold. Choose 0 to always show in stock"
+        }
+      ]
     },
     {
       "type": "text",
