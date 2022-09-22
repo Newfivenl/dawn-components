@@ -37,6 +37,19 @@ if (!customElements.get('quick-add-modal')) {
           this.removeGalleryListSemantic();
           this.preventVariantURLSwitching();
           super.show(opener);
+
+          // Removing the default product page layout
+          if(location.pathname == '/') {
+            document.querySelector(".product-page-product__media-wrapper").remove();
+            document.querySelector(".shop-the-look-product__media-wrapper").style.display = 'flex';
+
+            const product_info_wrapper = document.querySelector(".product__info-wrapper");
+            product_info_wrapper.querySelector(".product__text").remove();
+            product_info_wrapper.querySelector(".product__title").remove();
+            product_info_wrapper.querySelector(".price").remove();
+            product_info_wrapper.querySelector(".product__tax").remove();
+          };
+
         })
         .finally(() => {
           opener.removeAttribute('aria-disabled');

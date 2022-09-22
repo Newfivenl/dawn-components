@@ -70,7 +70,7 @@
                         </button>
                       </modal-opener>
                       <quick-add-modal id="QuickAdd-{{ block.settings.look_1.id }}" class="quick-add-modal">
-                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_1.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
+                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_1.title | escape }}" aria-modal="true" class="shop-the-look__modal quick-add-modal__content global-settings-popup" tabindex="-1">
                           <button id="ModalClose-{{ block.settings.look_1.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
                           <div id="QuickAddInfo-{{ block.settings.look_1.id }}" class="quick-add-modal__content-info">
                           </div>
@@ -156,7 +156,7 @@
                         </button>
                       </modal-opener>
                       <quick-add-modal id="QuickAdd-{{ block.settings.look_2.id }}" class="quick-add-modal">
-                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_2.title | escape }}" aria-modal="true" class="quick-add-modal__content global-settings-popup" tabindex="-1">
+                        <div role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: block.settings.look_2.title | escape }}" aria-modal="true" class="shop-the-look__modal quick-add-modal__content global-settings-popup" tabindex="-1">
                           <button id="ModalClose-{{ block.settings.look_2.id }}" type="button" class="quick-add-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
                           <div id="QuickAddInfo-{{ block.settings.look_2.id }}" class="quick-add-modal__content-info">
                           </div>
@@ -364,6 +364,50 @@ color: #000;
 
 .shop-the-look .quick-add {
   display: none;
+}
+
+/* Product popup */
+
+.shop-the-look__modal.quick-add-modal__content {
+  width: 40%;
+  height: 100%;
+  left: auto;
+  /* Need to animate to 0% */
+  transform: translateX(100%);
+  right: 0%;
+  margin-top: 0px;
+  max-height: initial;
+
+}
+
+.shop-the-look__modal .product:not(.product--no-media) .product__media-wrapper, 
+.shop-the-look__modal .product:not(.product--no-media) .product__info-wrapper {
+  width: auto;
+  max-width: initial;
+}
+
+.shop-the-look__modal .product:not(.product--no-media) .product__info-wrapper {
+  padding-left: 0px;
+}
+
+.shop-the-look__modal .product__title h2 {
+  font-size: 27px;
+}
+
+.shop-the-look-product__media-wrapper {
+  width: 100% !important;
+  display: none;
+  align-items: center;
+}
+
+
+.shop-the-look-product__media-wrapper  .product__media-gallery {
+  flex-basis: 40%;
+  margin-right: 20px;
+}
+
+.shop-the-look-product__media-wrapper .product__tax {
+  margin-top: 0px;
 }
 
 @media only screen and (max-width: 820px) {
