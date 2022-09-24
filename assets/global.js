@@ -466,15 +466,18 @@ class ModalDialog extends HTMLElement {
     const popup = this.querySelector('.template-popup');
     document.body.classList.add('overflow-hidden');
     this.setAttribute('open', '');
+    this.removeAttribute('close', '');
     if (popup) popup.loadContent();
     trapFocus(this, this.querySelector('[role="dialog"]'));
     window.pauseAllMedia();
   }
 
   hide() {
+    
     document.body.classList.remove('overflow-hidden');
     document.body.dispatchEvent(new CustomEvent('modalClosed'));
     this.removeAttribute('open');
+    this.setAttribute('close', '');
     removeTrapFocus(this.openedBy);
     window.pauseAllMedia();
   }

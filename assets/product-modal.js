@@ -6,11 +6,13 @@ if (!customElements.get('product-modal')) {
 
     hide() {
       super.hide();
+      alert("hide")
     }
 
     show(opener) {
       super.show(opener);
       this.showActiveMedia();
+      alert("show")
     }
 
     showActiveMedia() {

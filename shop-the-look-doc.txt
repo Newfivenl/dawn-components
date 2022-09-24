@@ -230,3 +230,11 @@ add code to main-product.liquid
         {%- endfor -%}
       </div>
     </div>
+
+global.js
+show() function
+add this code this.removeAttribute('close', '');
+hide() function
+add this code this.setAttribute('close', '');
+
+
