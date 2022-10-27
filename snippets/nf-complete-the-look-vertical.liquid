@@ -94,19 +94,19 @@
   </div>
   <div>
     <span>{{look.title}}</span>
-        {% render 'price', product: card_product, price_class: '' %}
+        {% render 'price', product: look, price_class: '' %}
 
         {% unless look.has_only_default_variant %}
         {% capture sizes %}
         {%- for variant in look.variants -%}
-        {{ look.title | handleize }} | {{variant.id}} | {{variant.title | downcase }} | {{variant.available}}
+        {{ look.title | handleize }} | {{ variant.id }} | {{ variant.title | downcase }} | {{ variant.available }} | {{ variant.price | money_with_currency }} | {{ variant.compare_at_price | money_with_currency }}
         {% if forloop.last == false %}::{% endif%}
         {%- endfor -%}
         {% endcapture %}
         {% endunless %}
 
-        {% assign sizes_array = sizes | split: '::'  %}
-
+        {% assign sizes_array = sizes | split: '::' %}
+      
     <div class="select">
       <select class="variant_sizes_select select__select" product-id="{{look.id}}">
         <option  selected disabled>Select</option>
@@ -116,9 +116,11 @@
           {% assign variant_id =  size_val[1] | join: ', '%} 
           {% assign variant_title =  size_val[2] | join: ', '%} 
           {% assign variant_available =  size_val[3] | strip | join: ', '%} 
+          {% assign variant_price =  size_val[4] | strip | join: ', '%}
+          {% assign variant__compare_price =  size_val[5] | strip | join: ', '%}
           
           {% if variant_available == 'true' %}
-            <option value="{{ variant_id | strip }}">
+            <option value="{{ variant_id | strip }}" data-price="{{ variant_price }}" data-compare-price="{{ variant__compare_price }}">
               {{ variant_title | strip}} 
             </option>
           {% endif %}
@@ -171,6 +173,26 @@
             document.querySelectorAll('.nf-complete-the-look-vertical__content').forEach((element) => {
               element.querySelector('.variant_sizes_select').addEventListener('change', (event) => {
                 const variantId = event.target.value;
+                const variantPrice =  event.target[event.target.selectedIndex].getAttribute("data-price");
+                const variantComparePrice = event.target[event.target.selectedIndex].getAttribute("data-compare-price");
+                console.log(variantPrice)
+                console.log(variantComparePrice)
+
+                const priceSale = element.querySelector(".price__sale");
+                const priceRegular = element.querySelector(".price__regular")
+
+                if(variantComparePrice) {
+                  priceSale.querySelector(".price-item--regular").innerHTML = variantComparePrice ;
+                  priceSale.querySelector(".price-item--last").innerHTML = variantPrice;
+                  priceRegular.style.display = "none";
+                  priceSale.style.display = "block";
+                }else {
+                  priceRegular.querySelector(".price-item--regular").innerHTML = variantPrice;
+                  priceSale.style.display = "none";
+                  priceRegular.style.display = "block";
+                  priceRegular.querySelector(".price-item--regular").style.textDecoration = "none";
+                }
+
                 var $addToCartBtn = element.querySelector(".variant-id");
                 $addToCartBtn.setAttribute('value', variantId);
               });
