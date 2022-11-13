@@ -41,7 +41,7 @@
         "3b0c5527-ace9-477f-b6b3-decb42eaaed3": {
           "type": "in_stock_msg",
           "settings": {
-            "inventory_threshold": 15
+            "inventory_threshold": 5
           }
         },
         "buy_buttons": {
