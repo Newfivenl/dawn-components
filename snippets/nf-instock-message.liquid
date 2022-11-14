@@ -23,7 +23,7 @@
         {% endif %}
         
         {% assign inventory_threshold = block.settings.inventory_threshold %}
-         
+         threshold {{ inventory_threshold }}
         {% if inventory_threshold > 0 %}
             {% if variant.inventory_quantity == 0 and variant.available == false or variant.inventory_quantity < 0 and variant.available == false %}
             {% assign dataStock = 'no-stock' %}
