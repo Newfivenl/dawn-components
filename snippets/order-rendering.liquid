@@ -112,7 +112,7 @@
 <div id="product-details"></div>
 
 <script>
-  const productDetails = document.querySelector('#product-details');
+  const productDetails = document.getElementById('product-details');
 
   fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
   .then((response) => response.text())
