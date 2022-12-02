@@ -108,13 +108,15 @@
   {% endpaginate %}
 </div>
 
+<div id="product-details"></div>
+
 <script>
-  const h2 = document.querySelector('h2');
+  const productDetails = document.querySelector('#product-details');
 
   fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
   .then((response) => response.text())
   .then((data) => {
-    h2.innerHTML = data;
-    console.log(h2)
+    productDetails.innerHTML = data;
+    console.log(productDetails)
   });
 </script>
