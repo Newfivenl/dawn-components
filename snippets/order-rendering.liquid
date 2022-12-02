@@ -110,6 +110,12 @@
 
 <script>
   fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
-        .then(response => response.text())
-        .then(data => console.log(data));
+    .then(response => {
+    })
+    .then(data => {
+      console.log(data)
+    })
+    .catch(error => {
+        // handle the error
+    });
 </script>
