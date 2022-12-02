@@ -1,4 +1,5 @@
 {%- if customer.tags contains 'account_overlay' -%}
+  <div class="customer order section-{{ section.id }}-padding">
   <h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
   {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
   <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
@@ -276,7 +277,8 @@
         </td>
       </tr>
     </tfoot>
-  </table>
+  </table
+    </div>
 {%- else -%}
   <div class="customer order section-{{ section.id }}-padding">
     <svg style="display:none">
