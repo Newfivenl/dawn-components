@@ -9,6 +9,13 @@
     productDetails.querySelector("#shopify-section-header").remove();
     productDetails.querySelector("#shopify-section-announcement-bar").remove();
   });
+
+
+  fetch('/products/ab-lifestyle-bannier-signature-t-shirt-royal-blue?variant=43076871946488')
+  .then((response) => response.text())
+  .then((data) =>{
+    console.log(data);
+  })
 </script>
 
 <div id="customer-order-lists" style="display:none;">
