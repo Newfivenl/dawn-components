@@ -227,6 +227,9 @@
     {% section 'header' %}
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
+      <div class="page-width">
+        {%- render 'order-rendering' -%}
+      </div>
     </main>
 
     {% section 'footer' %}
@@ -268,5 +271,8 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+
+
   </body>
 </html>
