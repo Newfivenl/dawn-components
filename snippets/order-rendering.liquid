@@ -1,5 +1,21 @@
 {%- if customer.tags contains 'account_overlay' -%}
   account overlay
+  <div id="product-details"></div>
+  <script>
+    const productDetails = document.getElementById('product-details');
+
+    fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
+    .then((response) => response.text())
+    .then((data) => {
+      productDetails.innerHTML = data;
+      productDetails.querySelector("#shopify-section-header").remove();
+      productDetails.querySelector("#shopify-section-announcement-bar").remove();
+      productDetails.querySelector("#customer-order-header").remove();
+      productDetails.querySelector("#customer-order-billing-address").remove();
+      productDetails.querySelector("#customer-order-lists").remove();
+
+    });
+  </script>
 {%- else -%}
   <div id="customer-order-lists">
     <h2>{{ 'customer.orders.title' | t }}</h2>
@@ -113,22 +129,4 @@
       {%- endif -%}
     {% endpaginate %}
   </div>
-
-  <div id="product-details"></div>
-
-  <script>
-    const productDetails = document.getElementById('product-details');
-
-    fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
-    .then((response) => response.text())
-    .then((data) => {
-      productDetails.innerHTML = data;
-      productDetails.querySelector("#shopify-section-header").remove();
-      productDetails.querySelector("#shopify-section-announcement-bar").remove();
-      productDetails.querySelector("#customer-order-header").remove();
-      productDetails.querySelector("#customer-order-billing-address").remove();
-      productDetails.querySelector("#customer-order-lists").remove();
-
-    });
-  </script>
 {%- endif -%}
