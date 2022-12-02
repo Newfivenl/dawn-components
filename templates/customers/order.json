@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-order-nf",
+      "type": "main-order",
       "settings": {
       }
     }
