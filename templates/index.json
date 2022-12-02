@@ -2,6 +2,7 @@
   "sections": {
     "image_banner": {
       "type": "image-banner",
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -49,6 +50,7 @@
     },
     "rich_text": {
       "type": "rich-text",
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
@@ -79,6 +81,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
@@ -106,6 +109,7 @@
     },
     "collage": {
       "type": "collage",
+      "disabled": true,
       "blocks": {
         "collection-0": {
           "type": "collection",
@@ -144,6 +148,7 @@
     },
     "video": {
       "type": "video",
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "h1",
@@ -157,6 +162,7 @@
     },
     "multicolumn": {
       "type": "multicolumn",
+      "disabled": true,
       "blocks": {
         "column1": {
           "type": "column",
@@ -207,15 +213,6 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "1663335456f5285717": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "{{customer.first_name}}\n{{ customer.default_address | format_address }}\n\n  <div>\n      <h2>{{ 'customer.orders.title' | t }}<\/h2>\n\n      {% paginate customer.orders by 20 %}\n        {%- if customer.orders.size > 0 -%}\n          <table role=\"table\" class=\"order-history\">\n            <caption class=\"visually-hidden\">{{ 'customer.orders.title' | t }}<\/caption>\n            <thead role=\"rowgroup\">\n              <tr role=\"row\">\n                <th id=\"ColumnOrder\" scope=\"col\" role=\"columnheader\">{{ 'customer.orders.order_number' | t }}<\/th>\n                <th id=\"ColumnDate\" scope=\"col\" role=\"columnheader\">{{ 'customer.orders.date' | t }}<\/th>\n                <th id=\"ColumnPayment\" scope=\"col\" role=\"columnheader\">{{ 'customer.orders.payment_status' | t }}<\/th>\n                <th id=\"ColumnFulfillment\" scope=\"col\" role=\"columnheader\">{{ 'customer.orders.fulfillment_status' | t }}<\/th>\n                <th id=\"ColumnTotal\" scope=\"col\" role=\"columnheader\">{{ 'customer.orders.total' | t }}<\/th>\n              <\/tr>\n            <\/thead>\n            <tbody role=\"rowgroup\">\n              {%- for order in customer.orders -%}\n                <tr role=\"row\">\n                  <td\n                    id=\"RowOrder\"\n                    role=\"cell\"\n                    headers=\"ColumnOrder\"\n                    data-label=\"{{ 'customer.orders.order_number' | t }}\"\n                  >\n                    <a href=\"{{ order.customer_url }}\" aria-label=\"{{ 'customer.orders.order_number_link' | t: number: order.name }}\">\n                      {{ order.name }}\n                    <\/a>\n                  <\/td>\n                  <td headers=\"RowOrder ColumnDate\" role=\"cell\" data-label=\"{{ 'customer.orders.date' | t }}\">\n                    {{ order.created_at | time_tag: format: 'date' }}\n                  <\/td>\n                  <td headers=\"RowOrder ColumnPayment\" role=\"cell\" data-label=\"{{ 'customer.orders.payment_status' | t }}\">\n                    {{ order.financial_status_label }}\n                  <\/td>\n                  <td headers=\"RowOrder ColumnFulfillment\" role=\"cell\" data-label=\"{{ 'customer.orders.fulfillment_status' | t }}\">\n                    {{ order.fulfillment_status_label }}\n                  <\/td>\n                  <td headers=\"RowOrder ColumnTotal\" role=\"cell\" data-label=\"{{ 'customer.orders.total' | t }}\">\n                    {{ order.total_price | money_with_currency }}<\/td>\n                <\/tr>\n              {%- endfor -%}\n            <\/tbody>\n          <\/table>\n        {%- else -%}\n          <p>{{ 'customer.orders.none' | t }}<\/p>\n        {%- endif -%}\n\n        {%- if paginate.pages > 1 -%}\n          {%- if paginate.parts.size > 0 -%}\n              <nav class=\"pagination\" role=\"navigation\" aria-label=\"{{ 'general.pagination.label' | t }}\">\n                <ul role=\"list\">\n                {%- if paginate.previous -%}\n                  <li>\n                    <a href=\"{{ paginate.previous.url }}\" aria-label=\"{{ 'general.pagination.previous' | t }}\">\n                      <svg aria-hidden=\"true\" focusable=\"false\" viewBox=\"0 0 10 6\">\n                        <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z\" fill=\"currentColor\">\n                      <\/svg>\n                    <\/a>\n                  <\/li>\n                {%- endif -%}\n\n                {%- for part in paginate.parts -%}\n                  <li>\n                    {%- if part.is_link -%}\n                      <a href=\"{{ part.url }}\" aria-label=\"{{ 'general.pagination.page' | t: number: part.title }}\">{{ part.title }}<\/a>\n                    {%- else -%}\n                      {%- if part.title == paginate.current_page -%}\n                        <span aria-current=\"page\" aria-label=\"{{ 'general.pagination.page' | t: number: part.title }}\">{{ part.title }}<\/span>\n                      {%- else -%}\n                        <span>{{ part.title }}<\/span>\n                      {%- endif -%}\n                    {%- endif -%}\n                  <\/li>\n                {%- endfor -%}\n\n                {%- if paginate.next -%}\n                  <li>\n                    <a href=\"{{ paginate.next.url }}\" aria-label=\"{{ 'general.pagination.next' | t }}\" >\n                      <svg aria-hidden=\"true\" focusable=\"false\" viewBox=\"0 0 10 6\">\n                        <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z\" fill=\"currentColor\">\n                      <\/svg>\n                    <\/a>\n                  <\/li>\n                {%- endif -%}\n                <\/ul>\n              <\/nav>\n          {%- endif -%}\n        {%- endif -%}\n      {% endpaginate %}\n    <\/div>",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
     }
   },
   "order": [
@@ -224,7 +221,6 @@
     "featured_collection",
     "collage",
     "video",
-    "multicolumn",
-    "1663335456f5285717"
+    "multicolumn"
   ]
 }
