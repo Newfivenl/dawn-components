@@ -29,6 +29,7 @@
               >
                 <a
                   href="{{ order.customer_url }}"
+                  order-id="{{ order.id }}"
                   aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
                 >
                   {{ order.name }}
