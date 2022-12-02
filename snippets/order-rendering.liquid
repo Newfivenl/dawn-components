@@ -110,8 +110,7 @@
 
 <script>
   fetch('/account/orders/49ddcc3113e2fc57fe4723b41b15c57b')
-    .then(response => {
-    })
+    .then(response =>response.json())
     .then(data => {
       console.log(data)
     })
