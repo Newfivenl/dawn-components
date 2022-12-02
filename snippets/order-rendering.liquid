@@ -116,11 +116,11 @@
   .then((response) => response.text())
   .then((data) => {
     productDetails.innerHTML = data;
-    // productDetails.querySelector("#shopify-section-header").remove();
-    // productDetails.querySelector("#shopify-section-announcement-bar").remove();
-    // productDetails.querySelector("#customer-order-header").remove();
-    // productDetails.querySelector("#customer-order-billing-address").remove();
-    // productDetails.querySelector("#customer-order-lists").remove();
+    productDetails.querySelector("#shopify-section-header").remove();
+    productDetails.querySelector("#shopify-section-announcement-bar").remove();
+    productDetails.querySelector("#customer-order-header").remove();
+    productDetails.querySelector("#customer-order-billing-address").remove();
+    productDetails.querySelector("#customer-order-lists").remove();
 
   });
 </script>
