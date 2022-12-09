@@ -1,0 +1,37 @@
+<div id="product-description-specifications">
+    
+    {%- if product.description != blank -%}
+      <div class="product__description rte quick-add-hidden">
+        {{ product.description }}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign specifications = product.metafields.custom.specifications | replace: '["', " " | replace: '"]', " " | replace: '"', " "
+      assign objArr = specifications | split: ','
+      assign keyArr = ''
+      assign valArr = ''
+
+      for obj in objArr
+        assign key = obj | split: ':' | first 
+        assign value = obj | split: ':' | last 
+        assign keyArr = keyArr| append: ',' | append: key  
+        assign valArr = valArr| append: ',' | append: value  
+      endfor
+
+      assign keyArr = keyArr | remove_first: ',' | split: ','
+      assign valArr = valArr | remove_first: ',' | split: ','
+    -%}
+
+    {%- if product.metafields.custom.specifications != blank -%}
+      <div class="product-specifications">
+        <div><h2>Specifications</h2></div>
+        <div class="product-specifications-items">
+          {% for obj in objArr %}
+            <div class="product-specifications-item"><span>{{keyArr[forloop.index0]}}:</span> <span>{{valArr[forloop.index0]}}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    {%- endif -%}
+    
+  </div>

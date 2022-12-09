@@ -240,12 +240,12 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-          {%- when 'description' -%}
+          {%- comment -%} {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte quick-add-hidden">
                 {{ product.description }}
               </div>
-            {%- endif -%}
+            {%- endif -%} {%- endcomment -%}
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
@@ -549,6 +549,8 @@
       </div>
     </modal-dialog>
   {%- endfor -%}
+
+ {%- render 'product-description-specifications' -%}
 
   {%- if product.media.size > 0 -%}
     <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>

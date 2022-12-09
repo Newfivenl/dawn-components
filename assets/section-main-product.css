@@ -1199,3 +1199,43 @@ a.product__text {
   margin-left: 1.2rem;
   flex-shrink: 0;
 }
+
+
+.product-specifications h2 {
+  font-weight: 700;
+}
+
+.product-specifications-item {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  padding: 10px 20px;
+}
+
+.product-specifications-item span {
+  flex-basis: 50%;
+}
+
+.product-specifications-item:nth-of-type(even) {
+ background-color: #F2F2F2;
+}
+
+@media screen and (min-width: 750px) {
+
+  #product-description-specifications > div {
+    flex-basis: 50%;
+    padding: 50px 0px;
+  }
+
+  #product-description-specifications {
+    display: flex;
+  }
+
+  #product-description-specifications .product-specifications {
+    padding-left: 20px;
+  }
+  
+  #product-description-specifications .product__description {
+    padding-right: 20px;
+  }
+}
