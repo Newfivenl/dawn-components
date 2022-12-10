@@ -1,0 +1,382 @@
+
+
+<link rel="preload stylesheet" href="{{ 'splide.min.css' | asset_url }}" as="style" crossorigin>
+<noscript>{{ 'splide.min.css' | asset_url | stylesheet_tag }}</noscript>
+
+<style>
+    .usp_text {
+   
+    }
+    .usp_text ul > li .splide__text___container {
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    .usp_text ul > li .icon {
+      width: 13px;
+      height: 13px;
+      margin: 0;
+      fill: #275035;
+      stroke: #275035;
+    }
+    .usp_text ul > li p {
+      font-size: 11px;
+      text-align: center;
+      font-weight: 600;
+      color: #121212;
+    }
+      
+</style>
+
+{% assign count_blocks = 0 %}
+
+<div class="usp_text" id="usp--{{ section.id }}">
+    <div class="container {% if section.settings.is_box_width %}page-width{% endif %}">
+        <div class="splide is-active is-initialized is-rendered" id="USP--{{ section.id }}">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for block in section.blocks %}    
+                    {% assign count_blocks = forloop.length %}
+                    {% case block.type %}
+                        {% when 'slide' %}
+                        <li class="splide__slide">
+                            <div class="splide__text___container">
+                                {% if section.settings.enable_icon and block.settings.svg_url == blank %}
+                                {% if section.settings.usp_icon == 'check-circle-solid' %}
+                                {% render 'icon-check-circle-solid' %}
+                                {% elsif section.settings.usp_icon == 'check-circle-regular' %}                   
+                                {% render 'icon-check-circle-regular' %}    
+                                {% else %}
+                                {% render 'icon-check-solid' %}    
+                                {% endif %}
+                                {% endif %}
+                                {% if block.settings.svg_url != blank %}
+                                <img src="{{ block.settings.svg_url }}" alt="" width="115" height="21">                                
+                                {% endif %}
+                                {{ block.settings.usp_text }}
+                            </div>
+                        </li>                            
+                        {% when 'shipping_time' %}
+                        {% assign now_time = "now" | date: "%R" %}   
+                        {% assign curr_time = now_time | date: "%s" %}
+                        {% assign curr_day = "now" | date: "%a" %}     
+                        {% assign start_time = block.settings.weekdays_starttime | date: "%s" %}
+                        {% assign end_time = block.settings.weekdays_endtime | date: "%s" %}     
+                        {% assign sameday_start_time = block.settings.sameday_start_time | date: "%s" %}
+                        {% assign sameday_end_time = block.settings.sameday_end_time | date: "%s" %}
+                        <li class="splide__slide">
+                            <div class="splide__text___container">
+                                {% if section.settings.enable_icon and block.settings.svg_url == blank %}
+                                {% if section.settings.usp_icon == 'check-circle-solid' %}
+                                {% render 'icon-check-circle-solid' %}
+                                {% elsif section.settings.usp_icon == 'check-circle-regular' %}                   
+                                {% render 'icon-check-circle-regular' %}    
+                                {% else %}
+                                {% render 'icon-check-solid' %}    
+                                {% endif %}
+                                {% endif %}
+                                {% if block.settings.svg_url != blank %}
+                                <img src="{{ block.settings.svg_url }}" alt="" width="115" height="21">                                
+                                {% endif %}
+                                {% if block.settings.enabled_sameday_delivery %}
+                                    {% if block.settings.weekday_mon and curr_day == 'Mon' or block.settings.weekday_tue and curr_day == 'Tue' or block.settings.weekday_wed and curr_day == 'Wed' or block.settings.weekday_thu and curr_day == 'Thu' or block.settings.weekday_fri and curr_day == 'Fri' or block.settings.weekday_sat and curr_day == 'Sat' or block.settings.weekday_sun and curr_day == 'Sun' %}
+                                        {% if curr_time >= sameday_start_time and curr_time <= sameday_end_time %}
+                                            {{ block.settings.same_day_msg }}
+                                        {% elsif curr_time >= start_time and curr_time <= end_time %}
+                                            {{ block.settings.weekdays_message_default }}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ block.settings.nonworking_days_message }}
+                                    {% endif %}
+                                {% else %}                                    
+                                    {% if block.settings.weekday_mon and curr_day == 'Mon' or block.settings.weekday_tue and curr_day == 'Tue' or block.settings.weekday_wed and curr_day == 'Wed' or block.settings.weekday_thu and curr_day == 'Thu' or block.settings.weekday_fri and curr_day == 'Fri' or block.settings.weekday_sat and curr_day == 'Sat' or block.settings.weekday_sun and curr_day == 'Sun' %}
+                                        {% if curr_time >= start_time and curr_time <= end_time %}
+                                            {{ block.settings.weekdays_message_default }}
+                                        {% else %}                                            
+                                            {{ block.settings.weekdays_message_fallback }}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ block.settings.nonworking_days_message }}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </li>                            
+                    {% endcase %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% style %}
+    {% if section.settings.bg_color != blank %}
+    #usp--{{ section.id }}.usp_text {
+        background-color: {{ section.settings.bg_color }};
+    }
+    {% endif %}
+
+    {% if section.settings.text_color != blank %}
+    #usp--{{ section.id }}.usp_text .splide__text___container p {
+        color: {{ section.settings.text_color }};
+    }
+    {% endif %}
+
+    {% if section.settings.usp_icon_color != blank %}
+    #usp--{{ section.id }}.usp_text .splide__text___container .icon {
+        fill: {{ section.settings.usp_icon_color }};
+        stroke: {{ section.settings.usp_icon_color }};
+    }        
+    {% endif %}
+
+    @media screen and (min-width: 1200px) {
+        #usp--{{ section.id }}.usp_text .splide__slide {
+            width: calc(100% / {{ count_blocks }});
+        }
+    }
+
+    @media screen and (max-width: 749px) {
+        #usp--{{ section.id }}.usp_text .splide__slide {
+            width: 100%;
+        }
+    }
+{% endstyle %}
+
+<script>
+    document.addEventListener( 'DOMContentLoaded', function () {
+        var usp = new Splide( '#USP--{{ section.id }}', {
+            lazyLoad: 'nearby',
+            preloadPages: 1,            
+            perPage: 4,
+            arrows: false,
+            pagination: false,
+            autoplay: true,
+            rewind: true,
+            breakpoints: {
+                1199: {
+                    perPage: 3
+                },
+                989: {
+                    perPage: 2
+                },
+                749: {
+                    perPage: 1
+                }
+            }
+        } );
+        usp.mount();
+    } );
+</script>
+
+{% schema %}
+    {
+        "name": "t:settings_schema.usp_bar.name",
+        "class": "spaced-section--full-width",
+        "tag": "div",
+        "settings": [
+            {
+                "type": "header",
+                "content": "t:settings_schema.usp_bar.settings.header.title"
+            },
+            {
+                "type": "color",
+                "id": "bg_color",
+                "label": "t:settings_schema.usp_bar.settings.background_color.label"            
+            },
+            {
+                "type": "color",
+                "id": "text_color",
+                "label": "t:settings_schema.usp_bar.settings.text_color.label"            
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_icon",
+                "label": "t:settings_schema.usp_bar.settings.usp_icon.check_enabled.label",
+                "default": true
+            },
+            {
+                "type": "select",
+                "id": "usp_icon",
+                "label": "t:settings_schema.usp_bar.settings.usp_icon.icon.label",
+                "options": [
+                    {
+                        "value": "check-solid",
+                        "label": "t:settings_schema.usp_bar.settings.usp_icon.icon.options.label_1"
+                    },
+                    {
+                        "value": "check-circle-solid",
+                        "label": "t:settings_schema.usp_bar.settings.usp_icon.icon.options.label_2"
+                    },
+                    {
+                        "value": "check-circle-regular",
+                        "label": "t:settings_schema.usp_bar.settings.usp_icon.icon.options.label_3"
+                    }
+                ],
+                "default": "check-solid"
+            },
+            {
+                "type": "color",
+                "id": "usp_icon_color",
+                "label": "t:settings_schema.usp_bar.settings.usp_icon.icon.color.label"
+            },
+            {
+                "type": "header",
+                "content": "t:settings_schema.usp_bar.settings.section_settings.content"
+            },
+            {
+                "type": "checkbox",
+                "id": "is_box_width",
+                "label": "t:settings_schema.usp_bar.settings.section_settings.container_width.label",
+                "default": true
+            }
+        ],
+        "blocks":[
+            {
+                "type": "slide",
+                "name": "t:settings_schema.usp_bar.settings.usp_item.name",
+                "limit": 4,
+                "settings":[
+                    {
+                        "type": "richtext",
+                        "id": "usp_text",
+                        "label": "t:settings_schema.usp_bar.settings.usp_item.settings.text.label",
+                        "default": "<p></p>"
+                    },
+                    {
+                        "type": "text",
+                        "id": "svg_url",
+                        "label": "t:settings_schema.usp_bar.settings.usp_item.settings.svg_url.label"
+                    }
+                ]
+            },
+            {
+                "type": "shipping_time",
+                "name": "t:settings_schema.usp_bar.shipping_time.name",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "header",
+                        "content": "t:settings_schema.usp_bar.shipping_time.same_day.content"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "enabled_sameday_delivery",
+                        "label": "t:settings_schema.usp_bar.shipping_time.same_day.check_enabled.label",
+                        "default": true
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "t:settings_schema.usp_bar.shipping_time.same_day.paragraph"
+                    },
+                    {
+                        "type": "text",
+                        "id": "sameday_start_time",
+                        "label": "t:settings_schema.usp_bar.shipping_time.same_day.start_time.label",
+                        "info": "t:settings_schema.usp_bar.shipping_time.same_day.start_time.info"
+                    },
+                    {
+                        "type": "text",
+                        "id": "sameday_end_time",
+                        "label": "t:settings_schema.usp_bar.shipping_time.same_day.end_time.label",
+                        "info": "t:settings_schema.usp_bar.shipping_time.same_day.end_time.info"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "same_day_msg",
+                        "label": "t:settings_schema.usp_bar.shipping_time.same_day.text_field.label",
+                        "default": "<p></p>",
+                        "info": "t:settings_schema.usp_bar.shipping_time.same_day.text_field.info"
+                    },
+                    {
+                        "type": "header",
+                        "content": "t:settings_schema.usp_bar.shipping_time.week_days.content"
+                    },
+                    {
+                        "type": "text",
+                        "id": "weekdays_starttime",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.text_field.start_time.label",
+                        "info": "t:settings_schema.usp_bar.shipping_time.week_days.text_field.start_time.info"
+                    },
+                    {
+                        "type": "text",
+                        "id": "weekdays_endtime",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.text_field.end_time.label",
+                        "info": "t:settings_schema.usp_bar.shipping_time.week_days.text_field.end_time.info"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "t:settings_schema.usp_bar.shipping_time.week_days.paragraph.content"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_mon",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.mon"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_tue",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.tue"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_wed",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.wed"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_thu",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.thu"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_fri",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.fri"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_sat",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.sat"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "weekday_sun",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.days.sun"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "weekdays_message_default",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.text_area.message_default.label",
+                        "default": "<p></p>"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "weekdays_message_fallback",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.text_area.message_fallback.label",
+                        "default": "<p></p>"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "t:settings_schema.usp_bar.shipping_time.week_days.nonworking_days.content"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "nonworking_days_message",
+                        "label": "t:settings_schema.usp_bar.shipping_time.week_days.nonworking_days.message_default.label",
+                        "default": "<p></p>"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "t:settings_schema.usp_bar.preset.name",
+                "blocks": [
+                    {
+                        "type": "slide"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

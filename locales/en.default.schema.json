@@ -330,6 +330,117 @@
           "label": "Vertical space"
         }
       }
+    },
+    "usp_bar": {
+      "name": "NF USP Text",
+      "preset": {
+        "name": "NF USP Slide"
+      },
+      "settings": {
+        "header": {
+          "title": "USP Settings"
+        },
+        "background_color": {
+          "label": "Background color"
+        },
+        "text_color": {
+          "label": "Text color"
+        },
+        "section_settings": {
+          "content": "Section settings",
+          "container_width": {
+            "label": "Box width?"
+          }
+        },
+        "usp_icon": {
+          "check_enabled": {
+            "label": "Show icon"
+          },
+          "icon": {
+            "label": "Select icon",
+            "options": {
+              "label_1": "Circle solid",
+              "label_2": "Circle check solid",
+              "label_3": "Circle check regular"
+            },
+            "color": {
+              "label": "Icon color"
+            }
+          }
+        },
+        "usp_item": {
+          "name": "USP Text item",
+          "settings": {
+            "text": {
+              "label": "USP Text"
+            },
+            "svg_url": {
+              "label": "SVG URL"
+            }
+          }
+        }
+      },
+      "shipping_time": {
+        "name": "Shipping time",
+        "same_day": {
+          "content": "Same Day delivery",
+          "check_enabled": {
+            "label": "Deliver on same day"
+          },
+          "paragraph": "Delivery time (We use 24h schedule in EU):",
+          "start_time": {
+            "label": "Start time",
+            "info": "Format (00:00 - 23:59)"
+          },
+          "end_time": {
+            "label": "End time",
+            "info": "Format (00:00 - 23:59)"
+          },
+          "text_field": {
+            "label": "Message",
+            "info": "Message for same day deliveries"
+          }
+        },
+        "week_days": {
+          "content": "Workdays delivery",
+          "text_field": {
+            "start_time": {
+              "label": "Start time:",
+              "info": "Format (00:00 - 23:59)"
+            },
+            "end_time": {
+              "label": "End time:",
+              "info": "Format (00:00 - 23:59)"
+            }
+          },
+          "paragraph": {
+            "content": "Days"
+          },
+          "days": {
+            "mon": "Monday",
+            "tue": "Tuesday",
+            "wed": "Wednesday",
+            "thu": "Thursday",
+            "fri": "Friday",
+            "sat": "Saturday",
+            "sun": "Sunday"
+          },
+          "text_area": {
+            "message_default": {
+              "label": "Message default"
+            },
+            "message_fallback": {
+              "label": "Message fallback"
+            }
+          },
+          "nonworking_days": {
+            "content": "Non-working days:",
+            "message_default": {
+              "label": "Message default"
+            }
+          }
+        }
+      }
     }
   },
   "sections": {
