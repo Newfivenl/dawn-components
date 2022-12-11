@@ -24,6 +24,10 @@
   </h1>
   <div class="rte">
     {{ page.content }}
+    {%- if page.handle == 'admin-api-access' -%}
+      {%- render 'order-rendering' -%}
+    {%- endif -%}
+
   </div>
 </div>
 
