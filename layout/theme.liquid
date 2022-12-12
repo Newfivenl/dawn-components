@@ -248,6 +248,7 @@
       
       
       
+      
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
@@ -279,6 +280,7 @@
 
 
 
+
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -287,12 +289,7 @@
 
     <script>
       
-      
-      
-      
-      
       let data =`
-      
         orders (first:5){
           edges {
             node {
@@ -311,6 +308,7 @@
       }).then(res => {
         console.log("Request complete! response:", res.body);
       });
+
 
 
 
