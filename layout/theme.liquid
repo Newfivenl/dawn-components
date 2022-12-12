@@ -244,6 +244,7 @@
 
     <script>
       
+      
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
@@ -271,6 +272,7 @@
         playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
       }
 
+
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -279,9 +281,10 @@
 
     <script>
       
+      
       let data =`
-      query {
-        orders (first: 5){
+      
+        orders (first:5){
           edges {
             node {
               id
@@ -289,7 +292,7 @@
             }
           }
         }
-      }
+      
       `;
 
       fetch("https://nf-components.myshopify.com/admin/api/2022-10/graphql.json", {
@@ -299,6 +302,7 @@
       }).then(res => {
         console.log("Request complete! response:", res);
       });
+
 
     </script>
   </body>
