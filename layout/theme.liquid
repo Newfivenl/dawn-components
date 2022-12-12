@@ -246,6 +246,7 @@
       
       
       
+      
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
@@ -275,6 +276,7 @@
 
 
 
+
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -282,6 +284,7 @@
     {%- endif -%}
 
     <script>
+      
       
       
       
@@ -303,8 +306,9 @@
         headers: {'Content-Type': 'application/graphql', 'X-Shopify-Access-Token': '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'}, 
         body: data
       }).then(res => {
-        console.log("Request complete! response:", res.data);
+        console.log("Request complete! response:", res);
       });
+
 
 
 
