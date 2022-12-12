@@ -245,12 +245,6 @@
     <script>
       
       
-      
-      
-      
-      
-      
-      
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
@@ -279,12 +273,6 @@
       }
 
 
-
-
-
-
-
-
     </script>
 
     {%- if settings.predictive_search_enabled -%}
@@ -294,9 +282,9 @@
     <script>
       
       
-      
       let data =`
-        orders (first:5){
+      query {
+        orders (first: 5){
           edges {
             node {
               id
@@ -304,22 +292,16 @@
             }
           }
         }
-      
+      }
       `;
 
       fetch("https://nf-components.myshopify.com/admin/api/2022-10/graphql.json", {
         method: "POST",
-        headers: {'Content-Type': 'application/graphql', 'X-Shopify-Access-Token': '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'}, 
-        body: {data}
+        headers: {'Content-Type': 'application/json', 'X-Shopify-Access-Token': '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'}, 
+        body: JSON.stringify(data)
       }).then(res => {
         console.log("Request complete! response:", res);
       });
-
-
-
-
-
-
 
 
     </script>
