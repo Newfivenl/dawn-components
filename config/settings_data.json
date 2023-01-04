@@ -187,6 +187,51 @@
         "settings": {
           "color_scheme": "background-1"
         }
+      },
+      "usp-text": {
+        "type": "usp-text",
+        "blocks": {
+          "f7563b64-99e3-4cc7-ac35-bb827ef14e68": {
+            "type": "slide",
+            "settings": {
+              "usp_text": "<p>5\/5 on Trustpilot<\/p>",
+              "svg_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0371\/4292\/1348\/files\/stars-4.5.svg"
+            }
+          },
+          "400fc0ec-9072-440b-90cd-3f8e3648deba": {
+            "type": "slide",
+            "settings": {
+              "usp_text": "<p>Gratis verzending binnen NL & BE<\/p>",
+              "svg_url": ""
+            }
+          },
+          "883f9724-174d-4c65-98f5-ef426418b7b0": {
+            "type": "slide",
+            "settings": {
+              "usp_text": "<p>14-day cooling-off period<\/p>",
+              "svg_url": ""
+            }
+          },
+          "369d3b24-c86c-454c-8cad-e82ad395e240": {
+            "type": "slide",
+            "settings": {
+              "usp_text": "<p>Own goldsmith<\/p>",
+              "svg_url": ""
+            }
+          }
+        },
+        "block_order": [
+          "f7563b64-99e3-4cc7-ac35-bb827ef14e68",
+          "400fc0ec-9072-440b-90cd-3f8e3648deba",
+          "883f9724-174d-4c65-98f5-ef426418b7b0",
+          "369d3b24-c86c-454c-8cad-e82ad395e240"
+        ],
+        "settings": {
+          "bg_color": "#282828",
+          "text_color": "#ffffff",
+          "enable_icon": true,
+          "usp_icon": "fas fa-check-circle"
+        }
       }
     },
     "content_for_index": [
