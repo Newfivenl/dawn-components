@@ -1,0 +1,16 @@
+.usp_text ul > li .splide__text___container {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top:-5px;
+}
+.usp_text ul > li i {
+  color: #008060;
+  font-size: 13px;
+}
+.usp_text ul > li p {
+  font-size: 11px;
+  color: #3a3e40;
+  text-align: center;
+}

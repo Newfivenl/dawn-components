@@ -1,0 +1,160 @@
+<link
+  rel="preload stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  as="style"
+  crossorigin />
+<link
+  rel="preload stylesheet"
+  href="{{ 'splide.min.css' | asset_url }}"
+  as="style"
+  crossorigin>
+<link
+  rel="preload stylesheet"
+  href="{{ 'section-usp-text.css' | asset_url }}"
+  as="style"
+  crossorigin>
+
+<noscript>{{ 'splide.min.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-usp-text.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% style %}
+  .usp_text {
+    max-height: 29px;
+  }
+
+  {% if section.settings.bg_color != blank %}
+    .usp_text {
+      background-color: {{ section.settings.bg_color }}
+      ;
+    }
+
+    .usp_text .splide__text___container > * {
+      color: {{ section.settings.text_color }}
+      ;
+      margin: 10px 0 5px;
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="usp_text">
+  <div class="container">
+    <div class="splide" id="USP--{{ section.id }}">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
+            <li class="splide__slide">
+              <div class="splide__text___container">
+                {% if section.settings.enable_icon and block.settings.svg_url == blank %}
+                  <i class="{{ section.settings.usp_icon }}"></i>
+                {% endif %}
+                {% if block.settings.svg_url != blank %}
+                  <img
+                    src="{{ block.settings.svg_url }}"
+                    alt=""
+                    width="115"
+                    height="21">
+                {% endif %}
+                {{ block.settings.usp_text }}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ 'splide.js' | asset_url }}" async></script>
+<script>
+  window.addEventListener('load', function() {
+    new Splide('#USP--{{ section.id }}', {
+      perPage: 4,
+      arrows: false,
+      pagination: false,
+      autoplay: true,
+      breakpoints: {
+        1199: {
+          perPage: 3
+        },
+        989: {
+          perPage: 2
+        },
+        749: {
+          perPage: 1
+        }
+      }
+    }).mount();
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "USP Text",
+    "class": "spaced-section--full-width",
+    "tag": "div",
+    "settings": [
+      {
+        "type": "header",
+        "content": "==USP Settings"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_icon",
+        "label": "Show icon",
+        "default": true
+      }, {
+        "type": "select",
+        "id": "usp_icon",
+        "label": "Select icon",
+        "options": [
+          {
+            "value": "fas fa-check-circle",
+            "label": "Circle check solid"
+          }, {
+            "value": "far fa-check-circle",
+            "label": "Circle check regular"
+          }
+        ],
+        "default": "fas fa-check-circle"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "USP Text item",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "usp_text",
+            "label": "USP text",
+            "default": "<p></p>"
+          }, {
+            "type": "text",
+            "id": "svg_url",
+            "label": "SVG URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "USP Slide",
+        "blocks": [
+          {
+            "type": "slide"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
