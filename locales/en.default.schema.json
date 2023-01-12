@@ -2029,6 +2029,20 @@
         "section_title": {
           "label": "Section title"
         },
+        "select_nf_column_title_alignment": {
+          "nf_column_title_alignment": "Text alignment",
+          "option": {
+            "label_1": "Top left",
+            "label_2": "Top center",
+            "label_3": "Top right",
+            "label_4": "Middle left",
+            "label_5": "Middle center",
+            "label_6": "Middle right",
+            "label_7": "Bottom left",
+            "label_8": "Bottom center",
+            "label_9": "Bottom right"
+          }
+        },
         "select": {
           "label_1": "Title alignment",
           "options": {

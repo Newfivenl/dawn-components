@@ -109,7 +109,7 @@
               >
               {% endif %}
           </div>
-          <div class="column__info--container title-wrapper--halign-{{ section.settings.nf_title_alignment }}">            
+          <div class="column__info--container title-wrapper--halign-{{ block.settings.nf_column_title_alignment }}">            
             <h3 class="column__info--title {% if block.settings.nf_block_title == blank %}visually-hidden{% endif %}" style="font-size:{{ block.settings.nf_block_title_size }}px;color:{{ block.settings.nf_block_title_color }};">{{ block.settings.nf_block_title | escape }}</h3>
             <p class="column__info--subtitle {% if block.settings.nf_block_subtitle == blank %}visually-hidden{% endif %}" style="color:{{ block.settings.nf_block_subtitle_color }};">{{ block.settings.nf_block_subtitle | escape }}</p>
             {% if block.settings.nf_button_link %}
@@ -276,6 +276,50 @@
           "id": "nf_block_subtitle_color",
           "label": "t:sections.nf_multicolumn.blocks.settings.block.color.label_2",
           "default": "#000000"
+        },
+        {
+        "type": "select",
+        "id": "nf_column_title_alignment",
+        "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.nf_column_title_alignment",
+        "options": [
+            {
+            "value": "top-left",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_1"
+            },
+            {
+            "value": "top-center",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_2"
+            },
+            {
+            "value": "top-right",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_3"
+            },
+            {
+            "value": "middle-left",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_4"
+            },
+            {
+            "value": "middle-center",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_5"
+            },
+            {
+            "value": "middle-right",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_6"
+            },
+            {
+            "value": "bottom-left",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_7"
+            },
+            {
+            "value": "bottom-center",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_8"
+            },
+            {
+            "value": "bottom-right",
+            "label": "t:sections.nf_multicolumn.blocks.settings.block.select_nf_column_title_alignment.option.label_9"
+            }
+          ],
+        "default": "bottom-left"
         },
         {
           "type": "select",
