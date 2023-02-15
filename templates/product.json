@@ -44,19 +44,27 @@
             "show_dynamic_checkout": false
           }
         },
-        "768b788b-c9b3-4c0e-97d6-a2a5d25cf3cf": {
-          "type": "complete-the-look-v2",
+        "d441fdb8-f765-4ef6-b68b-a1762567005f": {
+          "type": "complete-the-look-vert",
           "settings": {
-            "complete_the_look_vertical_header_text": "Complete the look",
-            "nf_complete_the_look_vertical_products": "{{ product.metafields.custom.complete_the_look.value }}",
-            "image_ratio": "square"
+            "complete_the_look_vertical_header_text": "Complete the look vertical",
+            "nf_complete_the_look_vertical_products": [
+              "2legare-short-logo-embroidery-zwart-neon-roze",
+              "ab-lifestyle-bannier-signature-short-river-blue",
+              "2legare-short-logo-embroidery-zwart-neon-groen"
+            ],
+            "image_ratio": "adapt"
           }
         },
-        "a15945dc-bdfc-4957-8d8b-ff5d0ad9c4b8": {
-          "type": "complete-the-look-v3",
+        "8e157dbc-9554-4c20-9554-341315f870d7": {
+          "type": "complete-the-look-hori",
           "settings": {
-            "complete_the_look_horizontal_header_text": "Complete the look",
-            "nf_complete_the_look_horizontal_products": "{{ product.metafields.custom.complete_the_look.value }}",
+            "complete_the_look_horizontal_header_text": "Complete the look horizontal",
+            "nf_complete_the_look_horizontal_products": [
+              "ab-lifestyle-bannier-signature-t-shirt-oranje",
+              "ab-lifestyle-bannier-signature-t-shirt-river-blue",
+              "ab-lifestyle-bannier-signature-t-shirt-royal-blue"
+            ],
             "image_ratio": "adapt"
           }
         },
@@ -116,8 +124,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "768b788b-c9b3-4c0e-97d6-a2a5d25cf3cf",
-        "a15945dc-bdfc-4957-8d8b-ff5d0ad9c4b8",
+        "d441fdb8-f765-4ef6-b68b-a1762567005f",
+        "8e157dbc-9554-4c20-9554-341315f870d7",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
