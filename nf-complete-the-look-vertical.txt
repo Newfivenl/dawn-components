@@ -184,8 +184,8 @@ Snippet name: nf-complete-the-look-vertical.liquid
     });
 </script>
 
-2. Put this code under  {%- when 'description'-%} in main-product.liquid
-{% when 'complete-the-look-v2' %}
+2. Put this code under  {%- when 'description' -%} in main-product.liquid
+{% when 'complete-the-look-vert' %}
               {% if block.settings.nf_complete_the_look_vertical_products != blank %}
                 <div id="nf-complete-the-look-vertical">
                   {% if block.settings.complete_the_look_vertical_header_text != blank %}
@@ -201,7 +201,7 @@ Snippet name: nf-complete-the-look-vertical.liquid
 
 3. add to schema main-product.liquid
 {
-      "type": "complete-the-look-v2",
+      "type": "complete-the-look-vert",
       "name": "NF Complete the look",
       "limit": 1,
       "settings": [
