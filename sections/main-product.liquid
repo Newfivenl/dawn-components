@@ -246,7 +246,7 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
-          {% when 'complete-the-look-v2' %}
+          {% when 'complete-the-look-vert' %}
               {% if block.settings.nf_complete_the_look_vertical_products != blank %}
                 <div id="nf-complete-the-look-vertical">
                   {% if block.settings.complete_the_look_vertical_header_text != blank %}
@@ -258,7 +258,7 @@
                   %}
                 </div>
               {% endif %}
-          {% when 'complete-the-look-v3' %}
+          {% when 'complete-the-look-hori' %}
             {% if block.settings.nf_complete_the_look_horizontal_products != blank %}
               <div id="nf-complete-the-look-horizontal">
                 {% if block.settings.complete_the_look_horizontal_header_text != blank %}
@@ -1031,8 +1031,8 @@
       ]
     },
     {
-      "type": "complete-the-look-v2",
-      "name": "NF Complete the look",
+      "type": "complete-the-look-vert",
+      "name": "Complete the look vert",
       "limit": 1,
       "settings": [
         {
@@ -1068,8 +1068,8 @@
       ]
     },
     {
-      "type": "complete-the-look-v3",
-      "name": "NF Complete the look v3",
+      "type": "complete-the-look-hori",
+      "name": "NF Complete the look hori",
       "limit": 1,
       "settings": [
         {
