@@ -299,6 +299,7 @@
                         
                         document.querySelector(".cart-count-bubble span").innerHTML = data.item_count;
                         cartDrawer.querySelector(".CartDrawer-Item-"+delete_btn.dataset.variant).remove();
+                        cartDrawer.querySelector(".cart-item[cart-item-variant-id='"+delete_btn.dataset.variant+"']").remove();
 
                         if(data.item_count == 0) {
                             document.querySelector(".drawer__header").classList.add("display__none");

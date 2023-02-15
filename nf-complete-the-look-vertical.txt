@@ -571,7 +571,7 @@ Put this file in your snippet folder
 
 
 2. Put this code under  {%- when 'description'-%} 
-{% when 'complete-the-look-v3' %}
+{% when 'complete-the-look-hori' %}
             {% if block.settings.nf_complete_the_look_horizontal_products != blank %}
               <div id="nf-complete-the-look-horizontal">
                 {% if block.settings.complete_the_look_horizontal_header_text != blank %}
