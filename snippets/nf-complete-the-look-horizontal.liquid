@@ -107,6 +107,10 @@
     text-align: center;
 }
 
+#nf-complete-the-look-horizontal-container .variant_sizes_select option {
+    text-transform: uppercase;
+}
+
 </style>
 
 <div id="nf-complete-the-look-horizontal-container">
@@ -140,18 +144,20 @@
             <div class="nf-complete-the-look-horizontal__image ratio" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
                 <div class="nf-complete-the-look-horizontal--content__media">
                     <div class="nf-complete-the-look-horizontal--content--media__content">
-                        <img
-                        srcset="{%- if look.featured_image.width >= 165 -%}{{ look.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
-                        {%- if look.featured_image.width >= 360 -%}{{ look.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
-                        {%- if look.featured_image.width >= 533 -%}{{ look.featured_image | image_url: width: 533 }} 533w,{%- endif -%}
-                        {%- if look.featured_image.width >= 720 -%}{{ look.featured_image | image_url: width: 720 }} 720w,{%- endif -%}
-                        {%- if look.featured_image.width >= 940 -%}{{ look.featured_image | image_url: width: 940 }} 940w,{%- endif -%}
-                        {%- if look.featured_image.width >= 1066 -%}{{ look.featured_image | image_url: width: 1066 }} 1066w,{%- endif -%}
-                        {{ look.featured_image | image_url }} {{ look.featured_image.width }}w"
-                        src="{{ look.featured_image | img_url: width: 533 }}"
-                        alt="{{look.featured_image.alt}}" loading="lazy"
-                        width="{{ look.featured_image.width }}"
-                        height="{{ look.featured_image.height }}" />
+                        <a href="{{look.url}}">
+                            <img
+                            srcset="{%- if look.featured_image.width >= 165 -%}{{ look.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                            {%- if look.featured_image.width >= 360 -%}{{ look.featured_image | image_url: width: 360 }} 360w,{%- endif -%}
+                            {%- if look.featured_image.width >= 533 -%}{{ look.featured_image | image_url: width: 533 }} 533w,{%- endif -%}
+                            {%- if look.featured_image.width >= 720 -%}{{ look.featured_image | image_url: width: 720 }} 720w,{%- endif -%}
+                            {%- if look.featured_image.width >= 940 -%}{{ look.featured_image | image_url: width: 940 }} 940w,{%- endif -%}
+                            {%- if look.featured_image.width >= 1066 -%}{{ look.featured_image | image_url: width: 1066 }} 1066w,{%- endif -%}
+                            {{ look.featured_image | image_url }} {{ look.featured_image.width }}w"
+                            src="{{ look.featured_image | img_url: width: 533 }}"
+                            alt="{{look.featured_image.alt}}" loading="lazy"
+                            width="{{ look.featured_image.width }}"
+                            height="{{ look.featured_image.height }}" />
+                        </a>
                     </div>
                 </div>
                 
@@ -159,7 +165,7 @@
             <div class="nf-complete-the-look-horizontal_actions">
                 <div class="select {% if look.selected_or_first_available_variant.available == false %}hide-select{% endif %}" >
                     <select class="variant_sizes_select select__select" product-id="{{look.id}}">
-                    <option  selected disabled>Select</option>
+                    <option  selected disabled>SELECT</option>
                     {% for size in sizes_array %}
                         {% assign size_val = size | split: '|' %}
                         {% assign product_title =  size_val[0] | join: ', '%} 
@@ -168,7 +174,7 @@
                         {% assign variant_available =  size_val[3] | strip | join: ', '%} 
                         {% if variant_available == 'true' %}
                             <option value="{{ variant_id | strip }}">
-                                {{ variant_title | strip}} 
+                                {{ variant_title | strip | uppercase }} 
                             </option>
                         {% endif %}
                     {%- endfor -%}
@@ -298,9 +304,8 @@
                     setTimeout(function(){
                         
                         document.querySelector(".cart-count-bubble span").innerHTML = data.item_count;
-                        cartDrawer.querySelector(".CartDrawer-Item-"+delete_btn.dataset.variant).remove();
-                        cartDrawer.querySelector(".cart-item[cart-item-variant-id='"+delete_btn.dataset.variant+"']").remove();
-
+                        {% comment %} cartDrawer.querySelector(".CartDrawer-Item-"+delete_btn.dataset.variant).remove(); {% endcomment %}
+                         cartDrawer.querySelector(".cart-item[cart-item-variant-id='"+delete_btn.dataset.variant+"']").remove();
                         if(data.item_count == 0) {
                             document.querySelector(".drawer__header").classList.add("display__none");
                             document.querySelector(".drawer__footer").classList.add("display__none");
