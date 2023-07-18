@@ -1,0 +1,30 @@
+<style>
+    .variant-additional-content {
+        display: none;
+    }
+</style>
+
+{% for variant in variants %}
+    <div id="variant-additional-content-{{ forloop.index }}" class="variant-additional-content" index="{{ forloop.index }}" variant-id="{{ variant.id }}">{{ variant.metafields.custom.additional_content.value }}</div>
+{% endfor %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+        const selectVariantSize = document.querySelectorAll('.select__select[name="options[Size]"]')
+        selectVariantSize.forEach((select => {
+            select.addEventListener('change', (event) => {
+                console.log(select.options[select.selectedIndex])
+                const selectedOption  = select.options[select.selectedIndex];
+                const selectedOptionIndex = selectedOption.getAttribute('index');
+                console.log(selectedOptionIndex)
+
+                document.querySelectorAll(`.variant-additional-content`).forEach((element => {
+                    element.style.display = 'none';
+                    document.querySelector(`#variant-additional-content-${selectedOptionIndex}`).style.display = 'block';
+                }));
+            })
+        }));
+
+    });
+</script>

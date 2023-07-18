@@ -267,6 +267,8 @@
                 </div>
               </details>
             </div>
+          {%- when 'additional_content' -%}
+            {% render 'additional-content-on-variant-change.liquid' variants: product.variants %} 
           {%- when 'quantity_selector' -%}
             <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
               <label class="form__label" for="Quantity-{{ section.id }}">
@@ -372,7 +374,7 @@
                           form="{{ product_form_id }}"
                         >
                           {%- for value in option.values -%}
-                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                            <option value="{{ value | escape }}" index="{{ forloop.index }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
                               {{ value }}
                             </option>
                           {%- endfor -%}
@@ -692,6 +694,11 @@
     {
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "limit": 1
+    },
+    {
+      "type": "additional_content",
+      "name": "Additional content",
       "limit": 1
     },
     {
