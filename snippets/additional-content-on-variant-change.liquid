@@ -1,3 +1,27 @@
+{% comment %}
+
+Instructions:
+
+1. add this code inside main-product schema as block
+{
+    "type": "additional_content",
+    "name": "Additional content",
+    "limit": 1
+},
+
+2. add to the block when case
+{%- when 'additional_content' -%}
+    {% render 'additional-content-on-variant-change.liquid' variants: product.variants %} 
+
+3. use this code on the theme variant function event and get the variant id
+ document.querySelectorAll(`.variant-additional-content`).forEach((element => {
+    element.style.display = 'none';
+    document.querySelector(`#variant-additional-content-${this.currentVariant.id}`).style.display = 'block';
+}));
+
+
+{% endcomment %}
+
 <style>
     .variant-additional-content {
         display: none;
@@ -5,26 +29,5 @@
 </style>
 
 {% for variant in variants %}
-    <div id="variant-additional-content-{{ forloop.index }}" class="variant-additional-content" index="{{ forloop.index }}" variant-id="{{ variant.id }}">{{ variant.metafields.custom.additional_content.value }}</div>
+    <div id="variant-additional-content-{{ variant.id}}" class="variant-additional-content" variant-id="{{ variant.id }}">{{ variant.metafields.custom.additional_content.value }}</div>
 {% endfor %}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
-
-        const selectVariantSize = document.querySelectorAll('.select__select[name="options[Size]"]')
-        selectVariantSize.forEach((select => {
-            select.addEventListener('change', (event) => {
-                console.log(select.options[select.selectedIndex])
-                const selectedOption  = select.options[select.selectedIndex];
-                const selectedOptionIndex = selectedOption.getAttribute('index');
-                console.log(selectedOptionIndex)
-
-                document.querySelectorAll(`.variant-additional-content`).forEach((element => {
-                    element.style.display = 'none';
-                    document.querySelector(`#variant-additional-content-${selectedOptionIndex}`).style.display = 'block';
-                }));
-            })
-        }));
-
-    });
-</script>

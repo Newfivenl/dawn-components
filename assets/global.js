@@ -766,6 +766,12 @@ class VariantSelects extends HTMLElement {
       this.renderProductInfo();
       this.updateShareUrl();
     }
+
+    document.querySelectorAll(`.variant-additional-content`).forEach((element => {
+      element.style.display = 'none';
+      document.querySelector(`#variant-additional-content-${this.currentVariant.id}`).style.display = 'block';
+    }));
+
   }
 
   updateOptions() {
