@@ -31,3 +31,13 @@ Instructions:
 {% for variant in variants %}
     <div id="variant-additional-content-{{ variant.id}}" class="variant-additional-content" variant-id="{{ variant.id }}">{{ variant.metafields.custom.additional_content.value }}</div>
 {% endfor %}
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const params = new URLSearchParams(window.location.search);
+        const variantId = params.get('variant');
+        document.querySelector(`#variant-additional-content-${variantId}`).style.display = 'block';
+    });
+</script>
