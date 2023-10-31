@@ -1,0 +1,122 @@
+
+.usp-dialog-content {
+    width: 483px;
+    height: 100%;
+    max-height: 100%;
+    top: 0;
+    border: 0;
+    padding: 60px 50px 20px 60px;
+    transition: ease-in-out .3s;
+    left: calc(100vw - 483px);
+    background-color: #0d0d0d;
+    color: #bbb;
+  }
+
+  .usp-dialog-content h3 {
+    color: #ffffff;
+  }
+  
+  .usp-dialog-content p {
+    /* color: rgb(128 128 126 / 1); */
+  }
+  
+  .usp-dialog-content img {
+    height: auto;
+  }
+  
+  .usp-dialog-content::backdrop {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: #000;
+    opacity: .8;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .usp-dialog-content {
+        /* left: calc(100vw - 100%); */
+        padding: 50px 20px 20px 20px;
+        max-width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 560px) {
+    .usp-dialog-content {
+        right: 0px;
+        left: auto;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .usp-dialog-content img {
+        width: 100%;
+    }
+  }
+  
+  
+  .usp-dialog-content[open] {
+    -webkit-animation: show .5s cubic-bezier(.4,0,.2,1) normal;
+  }
+  
+  .usp-dialog-content.hide {
+    -webkit-animation: hide 0.5s cubic-bezier(.4,0,.2,1) normal;
+  }
+  
+  .usp-dialog-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  }
+  
+  .usp-dialog-button svg {
+    width: 20px;
+  }
+  
+  .usp-wrap-dialog-content {
+    position: absolute;
+    top: 0%;
+    left: 46%;
+  }
+  
+  @keyframes show {
+    from {
+        transform: translateX(110%);
+    }
+  
+    to {
+        transform: translateX(0%);
+    }
+  }
+    
+  @keyframes hide {
+    from {
+    transform: translateX(0%);
+    }
+  
+    to {
+    transform: translateX(110%);
+    }
+  }
+  
+  
+  @-webkit-keyframes show {
+    from {
+        transform: translateX(110%);
+    }
+  
+    to {
+        transform: translateX(0%);
+    }
+  }
+    
+  @-webkit-keyframes hide {
+    from {
+    transform: translateX(0%);
+    }
+  
+    to {
+    transform: translateX(110%);
+    }
+  }

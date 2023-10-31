@@ -1,0 +1,100 @@
+{% comment %}
+  Affected files: 
+  nf-dialog-drawer.css
+  main-collection-product-grid
+  usp_volume_discount_collection_dialog_content
+
+  Instructions:
+  create a nf-dialog-drawer.css file paste the code from reference branch (repo: dawn-components branch: collection-volume-discount-drawer)
+  create a usp_volume_discount_collection_dialog_content.liquid to snippets folder
+  get the js scripts from main-collection-product-grid from reference branch (repo: dawn-components branch: collection-volume-discount-drawer)
+  get the modified ul product grid loop condition from the reference branch (repo: dawn-components branch: collection-volume-discount-drawer)
+  get the schema settings (Volume discount details) from the reference branch (repo: dawn-components branch: collection-volume-discount-drawer)
+  create collection metafield discount_block json type
+
+  1. call the css {{ 'nf-dialog-drawer.css' | asset_url | stylesheet_tag }} at the top of the main-collection-product-grid
+  2. uspDialogContent function paste at the bottom part of the main-collection-product-grid
+  3. usp-wrap-dialog-content paste at the bottom below the uspDialogContent script
+  4. Modify the product grid loop
+  5. Add the schema settings (Volume discount details) to main-collection-product-grid
+  6. Create the collection metafield and paste the sample json content
+
+{% endcomment %}
+
+
+<dialog id="nf-usp-dialog-content-{{count_dialog_volume_discount}}" class="usp-dialog-content usp-volume-discount-dialog-content" count_usp="{{count_dialog_volume_discount}}" close>
+    <h3>{{ volume_discount_title }}</h3>
+    <p>{{ volume_discount_sub_title }}</p>
+    {% assign discount_block = collection.metafields.custom.discount_block %}
+    {% assign json_discount_block = discount_block.value | json_parse %}
+    {% if discount_block != blank %}
+      <div class="usp-dialog-discount-block">
+        {% for key in json_discount_block %}
+          <div>
+            <div>{{ key.title }}</div>
+            <div>{{ key.discount }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {{ volume_discount_content }}
+    <button id="usp-dialog-button-{{block_id}}" class="usp-dialog-button">{% render 'icon-close', color: 'fill:#ffffff; color:#ffffff;' %}</button>
+</dialog>
+<style>
+.nf-usp-collection {
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #151515;
+padding: 20px 0px;
+}
+
+
+.nf-usp-collection span {
+color: #ffffff;
+}
+
+.nf-usp-collection span:last-child {
+font-size: 11px;
+letter-spacing: 1.5px;
+margin-left: 15px;
+cursor: pointer;
+font-weight: 100;
+}
+
+
+.nf-usp-collection span:last-child svg{
+width: 10px;
+transform: rotate(-90deg);
+}
+
+.nf-usp-collection svg{
+margin-right: 15px;
+}
+
+.usp-volume-discount-dialog-content h3{
+    margin-bottom: 20px;
+    letter-spacing: 0.08em;
+    font-size: 2rem;
+}
+
+.usp-volume-discount-dialog-content p{
+    color: rgb(128 128 126 / 1);
+}
+
+.usp-dialog-discount-block > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0px;
+    border-bottom: 1px solid #383838;
+    color: rgb(128 128 126 / 1);
+}
+
+@media screen and (max-width: 480px) {
+  .nf-usp-collection {
+    flex-direction: column;
+  }
+}
+
+</style>
