@@ -1,1 +1,41 @@
-{"sections":{"banner":{"type":"main-collection-banner","settings":{"show_collection_description":true,"show_collection_image":false,"color_scheme":"background-1"}},"product-grid":{"type":"main-collection-product-grid","settings":{"products_per_page":16,"columns_desktop":4,"image_ratio":"adapt","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"enable_quick_add":false,"enable_filtering":true,"filter_type":"horizontal","enable_sorting":true,"columns_mobile":"2","padding_top":36,"padding_bottom":36}}},"order":["banner","product-grid"]}
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "volume_discount_icon": "<svg class=\"\" width=\"16\" height=\"11\" viewbox=\"0 0 16 11\" fill=\"#837D66\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n      <path d=\"M16 1.46444L14.3758 6.10352e-05L5.58133 7.92911L1.62421 4.36139L0 5.82564L5.56675 10.8419L16 1.46444Z\" class=\"fill-current\"><\/path>\n    <\/svg>",
+        "volume_discount_title": "BUY MORE AND GET UP TO 25% OFF",
+        "volume_discount_button_text": "LEARN MORE",
+        "volume_discount_drawer_title": "VOLUME DISCOUNTING",
+        "volume_discount_sub_title": "Automatically applied in checkout",
+        "volume_discount_content": "<p>Order two or more of the same product (regardless of color or size), and save up to 25%.<\/p><p><br\/>Please note that this volume discount offer may not be combined with other promotional discount codes. If you enter a different discount code in checkout, the better of the two discounts will be applied.<\/p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}
